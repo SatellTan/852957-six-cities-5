@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const Main = (props) => {
-  const {rentNumber} = props;
+  const {rentalNumber} = props;
 
   return (
     <div className="page page--gray page--main">
@@ -71,13 +71,13 @@ const Main = (props) => {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{rentNumber} places to stay in Amsterdam</b>
+              <b className="places__found">{rentalNumber} places to stay in Amsterdam</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex="0">
                   Popular
                   <svg className="places__sorting-arrow" width="7" height="4">
-                    <use xlinkhref="#icon-arrow-select"></use>
+                    <use xlinkHref="#icon-arrow-select"></use>
                   </svg>
                 </span>
                 <ul className="places__options places__options--custom places__options--opened">
@@ -113,7 +113,7 @@ const Main = (props) => {
                       </div>
                       <button className="place-card__bookmark-button button" type="button">
                         <svg className="place-card__bookmark-icon" width="18" height="19">
-                          <use xlinkhref="#icon-bookmark"></use>
+                          <use xlinkHref="#icon-bookmark"></use>
                         </svg>
                         <span className="visually-hidden">To bookmarks</span>
                       </button>
@@ -145,7 +145,7 @@ const Main = (props) => {
                       </div>
                       <button className="place-card__bookmark-button place-card__bookmark-button--active button" type="button">
                         <svg className="place-card__bookmark-icon" width="18" height="19">
-                          <use xlinkhref="#icon-bookmark"></use>
+                          <use xlinkHref="#icon-bookmark"></use>
                         </svg>
                         <span className="visually-hidden">In bookmarks</span>
                       </button>
@@ -177,7 +177,7 @@ const Main = (props) => {
                       </div>
                       <button className="place-card__bookmark-button button" type="button">
                         <svg className="place-card__bookmark-icon" width="18" height="19">
-                          <use xlinkhref="#icon-bookmark"></use>
+                          <use xlinkHref="#icon-bookmark"></use>
                         </svg>
                         <span className="visually-hidden">To bookmarks</span>
                       </button>
@@ -212,7 +212,7 @@ const Main = (props) => {
                       </div>
                       <button className="place-card__bookmark-button button" type="button">
                         <svg className="place-card__bookmark-icon" width="18" height="19">
-                          <use xlinkhref="#icon-bookmark"></use>
+                          <use xlinkHref="#icon-bookmark"></use>
                         </svg>
                         <span className="visually-hidden">To bookmarks</span>
                       </button>
@@ -244,7 +244,7 @@ const Main = (props) => {
                       </div>
                       <button className="place-card__bookmark-button place-card__bookmark-button--active button" type="button">
                         <svg className="place-card__bookmark-icon" width="18" height="19">
-                          <use xlinkhref="#icon-bookmark-active"></use>
+                          <use xlinkHref="#icon-bookmark-active"></use>
                         </svg>
                         <span className="visually-hidden">In bookmarks</span>
                       </button>
@@ -274,7 +274,7 @@ const Main = (props) => {
 };
 
 Main.propTypes = {
-  rentNumber: PropTypes.number.isRequired,
+  rentalNumber: PropTypes.number.isRequired,
 };
 
 export default Main;
