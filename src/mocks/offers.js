@@ -21,7 +21,7 @@
     Текст отзыва.
 */
 
-const IMG_URL = `http://lorempixel.com/400/200/nightlife`;
+const IMG_URL = `http://placeimg.com/260/200`;
 const AVATAR_URL = `https://api.adorable.io/avatars/128`;
 
 export default [
@@ -29,13 +29,13 @@ export default [
     id: 1,
     city: `Paris`,
     photos: [{
-      src: `${IMG_URL}/${Math.random()}`,
+      src: `${IMG_URL}/${Math.round(Math.random()*100)}`,
     }, {
-      src: `${IMG_URL}/${Math.random()}`,
+      src: `${IMG_URL}/${Math.round(Math.random()*100)}`,
     }, {
-      src: `${IMG_URL}/${Math.random()}`,
+      src: `${IMG_URL}/${Math.round(Math.random()*100)}`,
     }],
-    title: `Title 1. 1aaaaaaaa 1bbbbbbbbbbb 1ccccccccccccc`,
+    title: `Title 1. aaaaaaa bbbbb ccccccc`,
     description: `description 1 AAAAAAAAAAA BBBBBBBBBB CCCCCCCCCCC DDDDDDDDD`,
     premium: false,
     type: `apartment`,
@@ -62,15 +62,15 @@ export default [
     id: 2,
     city: `Paris`,
     photos: [{
-      src: `${IMG_URL}/${Math.random()}`,
+      src: `${IMG_URL}/${Math.round(Math.random()*100)}`,
     }, {
-      src: `${IMG_URL}/${Math.random()}`,
+      src: `${IMG_URL}/${Math.round(Math.random()*100)}`,
     }, {
-      src: `${IMG_URL}/${Math.random()}`,
+      src: `${IMG_URL}/${Math.round(Math.random()*100)}`,
     }, {
-      src: `${IMG_URL}/${Math.random()}`,
+      src: `${IMG_URL}/${Math.round(Math.random()*100)}`,
     }],
-    title: `Title 2. 2aaaaaaaa 2bbbbbbbbbbb 2ccccccccccccc`,
+    title: `Title 2. bbbbb cccccccc ddddddddddddd`,
     description: `description 2 AAAAAAAAAAA BBBBBBBBBB CCCCCCCCCCC DDDDDDDDD`,
     premium: false,
     type: `room`,
@@ -87,14 +87,14 @@ export default [
       {
         picture: `${AVATAR_URL}/${Math.random()}`,
         name: `Kate P.`,
-        grade: 4,
+        grade: 2,
         date: `May 2018`,
         text: `kkkkkkkkkkkkkk kkkkkkkkkkkkkkkk kkkkkkkkkkkkkk kkkkkkkkkkkkkkkk`,
       },
       {
         picture: `${AVATAR_URL}/${Math.random()}`,
         name: `Oleg P.`,
-        grade: 3,
+        grade: 2,
         date: `May 2019`,
         text: `ooooooooooo oooooooooooooooo ooooooooooooooooooo oooooooooooo`,
       },
@@ -104,17 +104,17 @@ export default [
     id: 3,
     city: `Paris`,
     photos: [{
-      src: `${IMG_URL}/${Math.random()}`,
+      src: `${IMG_URL}/${Math.round(Math.random()*100)}`,
     }, {
-      src: `${IMG_URL}/${Math.random()}`,
+      src: `${IMG_URL}/${Math.round(Math.random()*100)}`,
     }, {
-      src: `${IMG_URL}/${Math.random()}`,
+      src: `${IMG_URL}/${Math.round(Math.random()*100)}`,
     }, {
-      src: `${IMG_URL}/${Math.random()}`,
+      src: `${IMG_URL}/${Math.round(Math.random()*100)}`,
     }, {
-      src: `${IMG_URL}/${Math.random()}`,
+      src: `${IMG_URL}/${Math.round(Math.random()*100)}`,
     }],
-    title: `Title 3. 3aaaaaaaa 3bbbbbbbbbbb 3ccccccccccccc`,
+    title: `Title 3. ccccccccc ddddddd eeeeeee`,
     description: `description 3 AAAAAAAAAAA BBBBBBBBBB CCCCCCCCCCC DDDDDDDDD`,
     premium: true,
     type: `house`,
@@ -153,21 +153,21 @@ export default [
   },
   {
     id: 4,
-    city: `Paris`,
+    city: `Amsterdam`,
     photos: [{
-      src: `${IMG_URL}/${Math.random()}`,
+      src: `${IMG_URL}/${Math.round(Math.random()*100)}`,
     }, {
-      src: `${IMG_URL}/${Math.random()}`,
+      src: `${IMG_URL}/${Math.round(Math.random()*100)}`,
     }, {
-      src: `${IMG_URL}/${Math.random()}`,
+      src: `${IMG_URL}/${Math.round(Math.random()*100)}`,
     }, {
-      src: `${IMG_URL}/${Math.random()}`,
+      src: `${IMG_URL}/${Math.round(Math.random()*100)}`,
     }, {
-      src: `${IMG_URL}/${Math.random()}`,
+      src: `${IMG_URL}/${Math.round(Math.random()*100)}`,
     }, {
-      src: `${IMG_URL}/${Math.random()}`,
+      src: `${IMG_URL}/${Math.round(Math.random()*100)}`,
     }],
-    title: `Title 4. 4aaaaaaaa 4bbbbbbbbbbb 4ccccccccccccc`,
+    title: `Title 4. dddddd eeeee ffffffffffffffffff`,
     description: `description 4 AAAAAAAAAAA BBBBBBBBBB CCCCCCCCCCC DDDDDDDDD`,
     premium: false,
     type: `hotel`,

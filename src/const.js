@@ -6,3 +6,5 @@ export const OfferTypes = {
   house: `House`,
   hotel: `Hotel`,
 };
+
+export const FavoritesList = [3, 2, 4, 1];
