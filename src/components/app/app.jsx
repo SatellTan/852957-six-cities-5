@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 import {Switch, Route, BrowserRouter} from "react-router-dom";
 import Main from "../main/main";
 import AuthScreen from "../auth-screen/auth-screen";
-import OfferCard from "../offer-card/offer-card";
+import OfferPage from "../offer-page/offer-page";
 import Favorites from "../favorites/favorites";
-import {OfferType} from "../../const.js";
+import {OfferTypes} from "../../const.js";
 
 
 const App = (props) => {
@@ -23,7 +23,7 @@ const App = (props) => {
         <Route exact path="/login">
           <AuthScreen/>
         </Route>
-        <Route exact path="/offer/:id?" component={OfferCard}/>
+        <Route exact path="/offer/:id?" component={OfferPage}/>
       </Switch>
     </BrowserRouter>
   );
@@ -40,11 +40,11 @@ App.propTypes = {
     title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     premium: PropTypes.bool.isRequired,
-    type: PropTypes.oneOf(Object.keys(OfferType)).isRequired,
+    type: PropTypes.oneOf(Object.keys(OfferTypes)).isRequired,
     bedroomsNumber: PropTypes.number.isRequired,
     adultsMaxNumber: PropTypes.number.isRequired,
     rentPrice: PropTypes.number.isRequired,
-    services: PropTypes.array.isRequired,
+    services: PropTypes.arrayOf(PropTypes.string).isRequired,
     owner: PropTypes.shape({
       picture: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
