@@ -14,13 +14,6 @@ const OfferCard = (props) => {
     reviews,
   } = offer;
 
-  /*const ratingBlockWidth = () => {
-    const gradesArray = reviews.map(x => x.grade);
-    const totalRating = gradesArray.reduce((acc, c) => acc + c, 0) / gradesArray.length;
-
-    return Math.round(totalRating) * 20;
-  };*/
-
   const premiumBlock = () => {
     if (premium) {
       return (
@@ -45,7 +38,7 @@ const OfferCard = (props) => {
       {premiumBlock()}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="#">
-          <img className="place-card__image" src={photos[0]? photos[0].src : ``} width="260" height="200" alt="Place image"/>
+          <img className="place-card__image" src={photos[0] ? photos[0].src : ``} width="260" height="200" alt="Place image"/>
         </a>
       </div>
       <div className="place-card__info">
@@ -70,7 +63,7 @@ const OfferCard = (props) => {
         <h2 className="place-card__name">
           <a href="#">{title}</a>
         </h2>
-        <p className="place-card__type">{OfferTypes.hasOwnProperty(type)? OfferTypes[type] : ``}</p>
+        <p className="place-card__type">{OfferTypes.hasOwnProperty(type) ? OfferTypes[type] : ``}</p>
       </div>
     </article>
   );

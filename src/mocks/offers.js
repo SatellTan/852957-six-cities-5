@@ -29,11 +29,11 @@ export default [
     id: 1,
     city: `Paris`,
     photos: [{
-      src: `${IMG_URL}/${Math.round(Math.random()*100)}`,
+      src: `${IMG_URL}/${Math.round(Math.random() * 100)}`,
     }, {
-      src: `${IMG_URL}/${Math.round(Math.random()*100)}`,
+      src: `${IMG_URL}/${Math.round(Math.random() * 100)}`,
     }, {
-      src: `${IMG_URL}/${Math.round(Math.random()*100)}`,
+      src: `${IMG_URL}/${Math.round(Math.random() * 100)}`,
     }],
     title: `Title 1. aaaaaaa bbbbb ccccccc`,
     description: `description 1 AAAAAAAAAAA BBBBBBBBBB CCCCCCCCCCC DDDDDDDDD`,
@@ -60,15 +60,15 @@ export default [
   },
   {
     id: 2,
-    city: `Paris`,
+    city: `Hamburg`,
     photos: [{
-      src: `${IMG_URL}/${Math.round(Math.random()*100)}`,
+      src: `${IMG_URL}/${Math.round(Math.random() * 100)}`,
     }, {
-      src: `${IMG_URL}/${Math.round(Math.random()*100)}`,
+      src: `${IMG_URL}/${Math.round(Math.random() * 100)}`,
     }, {
-      src: `${IMG_URL}/${Math.round(Math.random()*100)}`,
+      src: `${IMG_URL}/${Math.round(Math.random() * 100)}`,
     }, {
-      src: `${IMG_URL}/${Math.round(Math.random()*100)}`,
+      src: `${IMG_URL}/${Math.round(Math.random() * 100)}`,
     }],
     title: `Title 2. bbbbb cccccccc ddddddddddddd`,
     description: `description 2 AAAAAAAAAAA BBBBBBBBBB CCCCCCCCCCC DDDDDDDDD`,
@@ -104,15 +104,15 @@ export default [
     id: 3,
     city: `Paris`,
     photos: [{
-      src: `${IMG_URL}/${Math.round(Math.random()*100)}`,
+      src: `${IMG_URL}/${Math.round(Math.random() * 100)}`,
     }, {
-      src: `${IMG_URL}/${Math.round(Math.random()*100)}`,
+      src: `${IMG_URL}/${Math.round(Math.random() * 100)}`,
     }, {
-      src: `${IMG_URL}/${Math.round(Math.random()*100)}`,
+      src: `${IMG_URL}/${Math.round(Math.random() * 100)}`,
     }, {
-      src: `${IMG_URL}/${Math.round(Math.random()*100)}`,
+      src: `${IMG_URL}/${Math.round(Math.random() * 100)}`,
     }, {
-      src: `${IMG_URL}/${Math.round(Math.random()*100)}`,
+      src: `${IMG_URL}/${Math.round(Math.random() * 100)}`,
     }],
     title: `Title 3. ccccccccc ddddddd eeeeeee`,
     description: `description 3 AAAAAAAAAAA BBBBBBBBBB CCCCCCCCCCC DDDDDDDDD`,
@@ -155,17 +155,17 @@ export default [
     id: 4,
     city: `Amsterdam`,
     photos: [{
-      src: `${IMG_URL}/${Math.round(Math.random()*100)}`,
+      src: `${IMG_URL}/${Math.round(Math.random() * 100)}`,
     }, {
-      src: `${IMG_URL}/${Math.round(Math.random()*100)}`,
+      src: `${IMG_URL}/${Math.round(Math.random() * 100)}`,
     }, {
-      src: `${IMG_URL}/${Math.round(Math.random()*100)}`,
+      src: `${IMG_URL}/${Math.round(Math.random() * 100)}`,
     }, {
-      src: `${IMG_URL}/${Math.round(Math.random()*100)}`,
+      src: `${IMG_URL}/${Math.round(Math.random() * 100)}`,
     }, {
-      src: `${IMG_URL}/${Math.round(Math.random()*100)}`,
+      src: `${IMG_URL}/${Math.round(Math.random() * 100)}`,
     }, {
-      src: `${IMG_URL}/${Math.round(Math.random()*100)}`,
+      src: `${IMG_URL}/${Math.round(Math.random() * 100)}`,
     }],
     title: `Title 4. dddddd eeeee ffffffffffffffffff`,
     description: `description 4 AAAAAAAAAAA BBBBBBBBBB CCCCCCCCCCC DDDDDDDDD`,
