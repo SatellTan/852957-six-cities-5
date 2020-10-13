@@ -1,6 +1,40 @@
 import React from "react";
+import {offerType} from '../../types';
+import {OfferTypes, FavoritesList} from "../../const.js";
+import {ratingBlockWidth} from "../../utils.js";
 
-const OfferPage = () => {
+const OfferPage = (props) => {
+  const {offer} = props;
+
+  const {
+    premium,
+    photos,
+    rentPrice,
+    title,
+    type,
+    bedroomsNumber,
+    adultsMaxNumber,
+    services,
+    owner,
+    description,
+    reviews,
+  } = offer;
+
+  const premiumBlock = () => {
+    if (premium) {
+      return (
+        <div className="property__mark">
+          <span>Premium</span>
+        </div>
+      );
+    }
+    return ``;
+  };
+
+  const isFavoriteClass = () => {
+    return FavoritesList.includes(offer.id) ? ` property__bookmark-button--active` : ``;
+  };
+
   return <React.Fragment>
     <div style={{display: `none`}}>
       <svg xmlns="http://www.w3.org/2000/svg"><symbol id="icon-arrow-select" viewBox="0 0 7 4"><path fillRule="evenodd" clipRule="evenodd" d="M0 0l3.5 2.813L7 0v1.084L3.5 4 0 1.084V0z"></path></symbol><symbol id="icon-bookmark" viewBox="0 0 17 18"><path d="M3.993 2.185l.017-.092V2c0-.554.449-1 .99-1h10c.522 0 .957.41.997.923l-2.736 14.59-4.814-2.407-.39-.195-.408.153L1.31 16.44 3.993 2.185z"></path></symbol><symbol id="icon-star" viewBox="0 0 13 12"><path fillRule="evenodd" clipRule="evenodd" d="M6.5 9.644L10.517 12 9.451 7.56 13 4.573l-4.674-.386L6.5 0 4.673 4.187 0 4.573 3.549 7.56 2.483 12 6.5 9.644z"></path></symbol></svg>
@@ -34,36 +68,21 @@ const OfferPage = () => {
         <section className="property">
           <div className="property__gallery-container container">
             <div className="property__gallery">
-              <div className="property__image-wrapper">
-                <img className="property__image" src="img/room.jpg" alt="Photo studio"/>
-              </div>
-              <div className="property__image-wrapper">
-                <img className="property__image" src="img/apartment-01.jpg" alt="Photo studio"/>
-              </div>
-              <div className="property__image-wrapper">
-                <img className="property__image" src="img/apartment-02.jpg" alt="Photo studio"/>
-              </div>
-              <div className="property__image-wrapper">
-                <img className="property__image" src="img/apartment-03.jpg" alt="Photo studio"/>
-              </div>
-              <div className="property__image-wrapper">
-                <img className="property__image" src="img/studio-01.jpg" alt="Photo studio"/>
-              </div>
-              <div className="property__image-wrapper">
-                <img className="property__image" src="img/apartment-01.jpg" alt="Photo studio"/>
-              </div>
+              {photos.map((photo, i) => (
+                <div key={`${i}-${photo.src}`} className="property__image-wrapper">
+                  <img className="property__image" src={photo ? photo.src : ``} alt="Photo studio"/>
+                </div>
+              ))}
             </div>
           </div>
           <div className="property__container container">
             <div className="property__wrapper">
-              <div className="property__mark">
-                <span>Premium</span>
-              </div>
+              {premiumBlock()}
               <div className="property__name-wrapper">
                 <h1 className="property__name">
-                  Beautiful &amp; luxurious studio at great location
+                  {title}
                 </h1>
-                <button className="property__bookmark-button button" type="button">
+                <button className={`property__bookmark-button button` + isFavoriteClass()} type="button">
                   <svg className="property__bookmark-icon" width="31" height="33">
                     <use xlinkHref="#icon-bookmark"></use>
                   </svg>
@@ -72,77 +91,49 @@ const OfferPage = () => {
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
-                  <span style={{width: `80%`}}></span>
+                  <span style={{width: ratingBlockWidth(reviews) + `%`}}></span>
                   <span className="visually-hidden">Rating</span>
                 </div>
-                <span className="property__rating-value rating__value">4.8</span>
+                <span className="property__rating-value rating__value">{ratingBlockWidth(reviews, `rating`)}</span>
               </div>
               <ul className="property__features">
                 <li className="property__feature property__feature--entire">
-                  Apartment
+                  {OfferTypes.hasOwnProperty(type) ? OfferTypes[type] : ``}
                 </li>
                 <li className="property__feature property__feature--bedrooms">
-                  3 Bedrooms
+                  {bedroomsNumber} Bedrooms
                 </li>
                 <li className="property__feature property__feature--adults">
-                  Max 4 adults
+                  Max {adultsMaxNumber} adults
                 </li>
               </ul>
               <div className="property__price">
-                <b className="property__price-value">&euro;120</b>
+                <b className="property__price-value">&euro;{rentPrice}</b>
                 <span className="property__price-text">&nbsp;night</span>
               </div>
               <div className="property__inside">
                 <h2 className="property__inside-title">What&apos;s inside</h2>
                 <ul className="property__inside-list">
-                  <li className="property__inside-item">
-                    Wi-Fi
-                  </li>
-                  <li className="property__inside-item">
-                    Washing machine
-                  </li>
-                  <li className="property__inside-item">
-                    Towels
-                  </li>
-                  <li className="property__inside-item">
-                    Heating
-                  </li>
-                  <li className="property__inside-item">
-                    Coffee machine
-                  </li>
-                  <li className="property__inside-item">
-                    Baby seat
-                  </li>
-                  <li className="property__inside-item">
-                    Kitchen
-                  </li>
-                  <li className="property__inside-item">
-                    Dishwasher
-                  </li>
-                  <li className="property__inside-item">
-                    Cabel TV
-                  </li>
-                  <li className="property__inside-item">
-                    Fridge
-                  </li>
+                  {services.map((service, i) => (
+                    <li key={`${i}-${service[i]}`} className="property__inside-item">
+                      {service}
+                    </li>
+                  ))}
                 </ul>
               </div>
               <div className="property__host">
                 <h2 className="property__host-title">Meet the host</h2>
                 <div className="property__host-user user">
-                  <div className="property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper">
-                    <img className="property__avatar user__avatar" src="img/avatar-angelina.jpg" width="74" height="74" alt="Host avatar"/>
+                  <div className={`property__avatar-wrapper` + (owner.super ? ` property__avatar-wrapper--pro` : ``) + ` user__avatar-wrapper`}>
+                    <img className="property__avatar user__avatar" src={owner.picture ? owner.picture : ``} width="74" height="74" alt="Host avatar"/>
                   </div>
                   <span className="property__user-name">
-                    Angelina
+                    {owner.name}
                   </span>
                 </div>
                 <div className="property__description">
                   <p className="property__text">
-                    A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.
-                  </p>
-                  <p className="property__text">
-                    An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.
+                    {description}
                   </p>
                 </div>
               </div>
@@ -152,23 +143,23 @@ const OfferPage = () => {
                   <li className="reviews__item">
                     <div className="reviews__user user">
                       <div className="reviews__avatar-wrapper user__avatar-wrapper">
-                        <img className="reviews__avatar user__avatar" src="img/avatar-max.jpg" width="54" height="54" alt="Reviews avatar"/>
+                        <img className="reviews__avatar user__avatar" src={reviews[0].picture ? owner.picture : ``} width="54" height="54" alt="Reviews avatar"/>
                       </div>
                       <span className="reviews__user-name">
-                        Max
+                        {reviews[0].name}
                       </span>
                     </div>
                     <div className="reviews__info">
                       <div className="reviews__rating rating">
                         <div className="reviews__stars rating__stars">
-                          <span style={{width: `80%`}}></span>
-                          <span className="visually-hidden">Rating</span>
+                          <span style={{width: ratingBlockWidth([Object({grade: reviews[0].grade})]) + `%`}}></span>
+                          <span className="visually-hidden">{reviews[0].grade}</span>
                         </div>
                       </div>
                       <p className="reviews__text">
-                        A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.
+                        {reviews[0].text}
                       </p>
-                      <time className="reviews__time" dateTime="2019-04-24">April 2019</time>
+                      <time className="reviews__time" dateTime="2019-04-24">{reviews[0].date}</time>
                     </div>
                   </li>
                 </ul>
@@ -328,6 +319,10 @@ const OfferPage = () => {
       </main>
     </div>
   </React.Fragment>;
+};
+
+OfferPage.propTypes = {
+  offer: offerType.isRequired,
 };
 
 export default OfferPage;

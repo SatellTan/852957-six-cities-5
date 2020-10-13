@@ -5,6 +5,7 @@ import Main from "../main/main";
 import AuthScreen from "../auth-screen/auth-screen";
 import OfferPage from "../offer-page/offer-page";
 import Favorites from "../favorites/favorites";
+import {offerType} from '../../types';
 
 const App = (props) => {
   const {offersCount, offers} = props;
@@ -26,7 +27,12 @@ const App = (props) => {
         <Route exact path="/login">
           <AuthScreen/>
         </Route>
-        <Route exact path="/offer/:id?" component={OfferPage}/>
+        <Route exact path="/offer/:id?">
+          <OfferPage
+            offer={offers[1]}
+          />
+        </Route>
+
       </Switch>
     </BrowserRouter>
   );
@@ -34,7 +40,7 @@ const App = (props) => {
 
 App.propTypes = {
   offersCount: PropTypes.number.isRequired,
-  offers: PropTypes.array.isRequired,
+  offers: PropTypes.arrayOf(offerType).isRequired,
 };
 
 export default App;
