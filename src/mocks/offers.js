@@ -22,7 +22,7 @@
 */
 
 const IMG_URL = `http://placeimg.com/260/200`;
-const AVATAR_URL = `https://api.adorable.io/avatars/128`;
+const AVATAR_URL = `https://api.adorable.io/avatars`;
 
 export default [
   {
@@ -44,13 +44,13 @@ export default [
     rentPrice: 90,
     services: [`Wifi`, `Heating`, `Kitchen`, `Cable TV`, `Conditioning`, `Safe`],
     owner: {
-      picture: `${AVATAR_URL}/${Math.random()}`,
+      picture: `${AVATAR_URL}/${Math.round(Math.random() * 100)}`,
       name: `Piter Mog`,
       super: true,
     },
     reviews: [
       {
-        picture: `${AVATAR_URL}/${Math.random()}`,
+        picture: `${AVATAR_URL}/${Math.round(Math.random() * 100)}`,
         name: `Victor P.`,
         grade: 4,
         date: `April 2019`,
@@ -79,20 +79,20 @@ export default [
     rentPrice: 40,
     services: [`Wifi`, `Heating`, `Cable TV`],
     owner: {
-      picture: `${AVATAR_URL}/${Math.random()}`,
+      picture: `${AVATAR_URL}/${Math.round(Math.random() * 100)}`,
       name: `Susan Kors`,
       super: false,
     },
     reviews: [
       {
-        picture: `${AVATAR_URL}/${Math.random()}`,
+        picture: `${AVATAR_URL}/${Math.round(Math.random() * 100)}`,
         name: `Kate P.`,
         grade: 2,
         date: `May 2018`,
         text: `kkkkkkkkkkkkkk kkkkkkkkkkkkkkkk kkkkkkkkkkkkkk kkkkkkkkkkkkkkkk`,
       },
       {
-        picture: `${AVATAR_URL}/${Math.random()}`,
+        picture: `${AVATAR_URL}/${Math.round(Math.random() * 100)}`,
         name: `Oleg P.`,
         grade: 2,
         date: `May 2019`,
@@ -123,27 +123,27 @@ export default [
     rentPrice: 400,
     services: [`Wifi`, `Heating`, `Kitchen`, `Cable TV`, `Conditioning`, `Safe`, `Breakfast`],
     owner: {
-      picture: `${AVATAR_URL}/${Math.random()}`,
+      picture: `${AVATAR_URL}/${Math.round(Math.random() * 100)}`,
       name: `Roy Lork`,
       super: true,
     },
     reviews: [
       {
-        picture: `${AVATAR_URL}/${Math.random()}`,
+        picture: `${AVATAR_URL}/${Math.round(Math.random() * 100)}`,
         name: `Jack P.`,
         grade: 5,
         date: `May 2018`,
         text: `jjjjjjjjjjjjj jjjjjjjjjjjjj jjjjjjjjjjjjjjjjj jjjjjjjjjjjjjjjj`,
       },
       {
-        picture: `${AVATAR_URL}/${Math.random()}`,
+        picture: `${AVATAR_URL}/${Math.round(Math.random() * 100)}`,
         name: `Ann G.`,
         grade: 5,
         date: `May 2020`,
         text: `aaaaaaaaaaaaaaa aaaaaaaaaaaa aaaaaaaaaaaaaa aaaaaaaaaaaaaa`,
       },
       {
-        picture: `${AVATAR_URL}/${Math.random()}`,
+        picture: `${AVATAR_URL}/${Math.round(Math.random() * 100)}`,
         name: `Lora B.`,
         grade: 4,
         date: `June 2020`,
@@ -176,34 +176,34 @@ export default [
     rentPrice: 180,
     services: [`Wifi`, `Heating`, `Cable TV`, `Conditioning`, `Safe`, `Reception`],
     owner: {
-      picture: `${AVATAR_URL}/${Math.random()}`,
+      picture: `${AVATAR_URL}/${Math.round(Math.random() * 100)}`,
       name: `John Born`,
       super: false,
     },
     reviews: [
       {
-        picture: `${AVATAR_URL}/${Math.random()}`,
+        picture: `${AVATAR_URL}/${Math.round(Math.random() * 100)}`,
         name: `Oliver P.`,
         grade: 4,
         date: `May 2018`,
         text: `oooooooooooo oooooooooooooooo ooooooooooooo ooooooooooooo`,
       },
       {
-        picture: `${AVATAR_URL}/${Math.random()}`,
+        picture: `${AVATAR_URL}/${Math.round(Math.random() * 100)}`,
         name: `Rose G.`,
         grade: 4,
         date: `May 2020`,
         text: `rrrrrrrrrrrrrr rrrrrrrrrrrrrrrr rrrrrrrrrrrrrrrr rrrrrrrrrrrrr`,
       },
       {
-        picture: `${AVATAR_URL}/${Math.random()}`,
+        picture: `${AVATAR_URL}/${Math.round(Math.random() * 100)}`,
         name: `Helen B.`,
         grade: 3,
         date: `June 2020`,
         text: `hhhhhhhhhhh hhhhhhhhhhhhhhhhhh hhhhhhhhhhhhhhh hhhhhhhhhhhhhhhh`,
       },
       {
-        picture: `${AVATAR_URL}/${Math.random()}`,
+        picture: `${AVATAR_URL}/${Math.round(Math.random() * 100)}`,
         name: `Lili B.`,
         grade: 4,
         date: `August 2018`,

@@ -8,3 +8,8 @@ export const OfferTypes = {
 };
 
 export const FavoritesList = [3, 2, 4, 1];
+
+export const CommentSettings = {
+  COMMENTS_LENGTH_MIN: 50,
+  COMMENTS_LENGTH_MAX: 300,
+};

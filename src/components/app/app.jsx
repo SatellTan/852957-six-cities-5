@@ -27,12 +27,7 @@ const App = (props) => {
         <Route exact path="/login">
           <AuthScreen/>
         </Route>
-        <Route exact path="/offer/:id?">
-          <OfferPage
-            offer={offers[1]}
-          />
-        </Route>
-
+        <Route exact path={`/offer/:id?`} component={(currentProps) => <OfferPage offers={offers} {...currentProps}/>}/>
       </Switch>
     </BrowserRouter>
   );

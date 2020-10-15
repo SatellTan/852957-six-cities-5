@@ -1,8 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {Link} from "react-router-dom";
 import {offerType} from '../../types';
 import {OfferTypes, FavoritesList} from "../../const.js";
-import {ratingBlockWidth, sortingArrayOfObjectsByStringValue} from "../../utils.js";
+import {ratingBlock, sortingArrayOfObjectsByStringValue} from "../../utils.js";
 
 const Favorites = (props) => {
   const {offers} = props;
@@ -35,9 +36,9 @@ const Favorites = (props) => {
           <div className="container">
             <div className="header__wrapper">
               <div className="header__left">
-                <a className="header__logo-link" href="main.html">
+                <Link to="/" className="header__logo-link">
                   <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/>
-                </a>
+                </Link>
               </div>
               <nav className="header__nav">
                 <ul className="header__nav-list">
@@ -66,9 +67,9 @@ const Favorites = (props) => {
           </div>
         </main>
         <footer className="footer">
-          <a className="footer__logo-link" href="main.html">
+          <Link to="/" className="footer__logo-link">
             <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width="64" height="33"/>
-          </a>
+          </Link>
         </footer>
       </div>
     </React.Fragment>;
@@ -84,9 +85,9 @@ const Favorites = (props) => {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <a className="header__logo-link" href="main.html">
+              <Link to="/" className="header__logo-link">
                 <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/>
-              </a>
+              </Link>
             </div>
             <nav className="header__nav">
               <ul className="header__nav-list">
@@ -142,12 +143,12 @@ const Favorites = (props) => {
                             </div>
                             <div className="place-card__rating rating">
                               <div className="place-card__stars rating__stars">
-                                <span style={{width: ratingBlockWidth(offer.reviews) + `%`}}></span>
+                                <span style={{width: ratingBlock(offer.reviews) + `%`}}></span>
                                 <span className="visually-hidden">Rating</span>
                               </div>
                             </div>
                             <h2 className="place-card__name">
-                              <a href="#">{offer.title}</a>
+                              <Link to={`/offer/:` + offer.id}>{offer.title}</Link>
                             </h2>
                             <p className="place-card__type">{OfferTypes.hasOwnProperty(offer.type) ? OfferTypes[offer.type] : ``}</p>
                           </div>
@@ -162,9 +163,9 @@ const Favorites = (props) => {
         </div>
       </main>
       <footer className="footer container">
-        <a className="footer__logo-link" href="main.html">
+        <Link to="/" className="footer__logo-link">
           <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width="64" height="33"/>
-        </a>
+        </Link>
       </footer>
     </div>
   </React.Fragment>;

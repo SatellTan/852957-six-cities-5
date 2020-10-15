@@ -1,5 +1,5 @@
 // Получить ширину блока рейтинга в зависимости от его численного значения
-export const ratingBlockWidth = (reviews, value = `width`) => {
+export const ratingBlock = (reviews, value = `width`) => {
   const gradesArray = reviews.map((x) => x.grade);
   const totalRating = gradesArray.reduce((acc, c) => acc + c, 0) / gradesArray.length;
   if (value === `width`) {

@@ -1,12 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {Link} from "react-router-dom";
 import {offerType} from '../../types';
 import {OfferTypes, FavoritesList} from "../../const.js";
-import {ratingBlockWidth} from "../../utils.js";
+import {ratingBlock} from "../../utils.js";
 
 const OfferCard = (props) => {
   const {offer, onOfferCardHover} = props;
   const {
+    id,
     premium,
     photos,
     rentPrice,
@@ -57,12 +59,12 @@ const OfferCard = (props) => {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: ratingBlockWidth(reviews) + `%`}}></span>
+            <span style={{width: ratingBlock(reviews) + `%`}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{title}</a>
+          <Link to={`/offer/:` + id} className="header__logo-link">{title}</Link>
         </h2>
         <p className="place-card__type">{OfferTypes.hasOwnProperty(type) ? OfferTypes[type] : ``}</p>
       </div>
