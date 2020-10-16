@@ -1,14 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./components/app/app";
+import offers from "./mocks/offers";
 
 const Settings = {
-  RENTAL_NUMBER: 6
+  OFFERS_COUNT: 6
 };
 
 ReactDOM.render(
     <App
-      rentalNumber={Settings.RENTAL_NUMBER}
+      offersCount={Settings.OFFERS_COUNT}
+      offers={offers}
     />,
     document.querySelector(`#root`)
 );
