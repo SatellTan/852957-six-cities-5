@@ -150,7 +150,7 @@ const Favorites = (props) => {
                             <h2 className="place-card__name">
                               <Link to={`/offer/:` + offer.id}>{offer.title}</Link>
                             </h2>
-                            <p className="place-card__type">{OfferTypes.hasOwnProperty(offer.type) ? OfferTypes[offer.type] : ``}</p>
+                            <p className="place-card__type">{offer.type in OfferTypes ? OfferTypes[offer.type] : ``}</p>
                           </div>
                         </article>
                       ))}

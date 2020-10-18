@@ -7,7 +7,7 @@ export const OfferTypes = {
   hotel: `Hotel`,
 };
 
-export const FavoritesList = [3, 2, 4, 1];
+export const FavoritesList = [3, 2, 4];
 
 export const CommentSettings = {
   COMMENTS_LENGTH_MIN: 50,

@@ -7,7 +7,7 @@ export const ratingBlock = (reviews, value = `width`) => {
     return Math.round(totalRating) * 20;
   }
 
-  return +totalRating.toFixed(2);
+  return parseInt(totalRating.toFixed(2), 10);
 };
 
 // Отсортировать массив объектов по строковому значению keyName

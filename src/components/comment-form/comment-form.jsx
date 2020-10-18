@@ -28,11 +28,6 @@ class CommentForm extends PureComponent {
     this.setState({comment: evt.target.value});
   }
 
-  handleTextAreaChange(evt) {
-    evt.preventDefault();
-    this.setState({comment: evt.target.value});
-  }
-
   submitButtonDisabled() {
     if (this.state.grade && (this.state.comment.length > CommentSettings.COMMENTS_LENGTH_MIN) && (this.state.comment.length < CommentSettings.COMMENTS_LENGTH_MAX)) {
       return ``;

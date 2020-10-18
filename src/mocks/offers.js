@@ -48,6 +48,7 @@ export default [
       name: `Piter Mog`,
       super: true,
     },
+    locationCoords: [52.3909553943508, 4.85309666406198],
     reviews: [
       {
         picture: `${AVATAR_URL}/${Math.round(Math.random() * 100)}`,
@@ -83,6 +84,7 @@ export default [
       name: `Susan Kors`,
       super: false,
     },
+    locationCoords: [52.369553943508, 4.85309666406198],
     reviews: [
       {
         picture: `${AVATAR_URL}/${Math.round(Math.random() * 100)}`,
@@ -127,6 +129,7 @@ export default [
       name: `Roy Lork`,
       super: true,
     },
+    locationCoords: [52.3909553943508, 4.929309666406198],
     reviews: [
       {
         picture: `${AVATAR_URL}/${Math.round(Math.random() * 100)}`,
@@ -180,6 +183,7 @@ export default [
       name: `John Born`,
       super: false,
     },
+    locationCoords: [52.3809553943508, 4.939309666406198],
     reviews: [
       {
         picture: `${AVATAR_URL}/${Math.round(Math.random() * 100)}`,
