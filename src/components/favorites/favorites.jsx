@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 import {offerType} from '../../types';
 import {OfferTypes, FavoritesList} from "../../const.js";
-import {ratingBlock, sortingArrayOfObjectsByStringValue} from "../../utils.js";
+import {ratingBlock, sortArrayOfObjectsByStringValue} from "../../utils.js";
 
 const Favorites = (props) => {
   const {offers} = props;
@@ -11,7 +11,7 @@ const Favorites = (props) => {
   // Получить массив с предложениями, которые отмечены как favorite
   const favoriteOffers = FavoritesList.map((u) => offers.find((offer) => offer.id === u));
 
-  sortingArrayOfObjectsByStringValue(favoriteOffers, `city`);
+  sortArrayOfObjectsByStringValue(favoriteOffers, `city`);
 
   // Получить массив со всеми городами из списка favorite
   let favoriteCities = [];

@@ -27,7 +27,7 @@ const AVATAR_URL = `https://api.adorable.io/avatars`;
 export default [
   {
     id: 1,
-    city: `Paris`,
+    city: `Amsterdam`,
     photos: [{
       src: `${IMG_URL}/${Math.round(Math.random() * 100)}`,
     }, {
@@ -61,7 +61,7 @@ export default [
   },
   {
     id: 2,
-    city: `Hamburg`,
+    city: `Amsterdam`,
     photos: [{
       src: `${IMG_URL}/${Math.round(Math.random() * 100)}`,
     }, {
@@ -104,7 +104,7 @@ export default [
   },
   {
     id: 3,
-    city: `Paris`,
+    city: `Amsterdam`,
     photos: [{
       src: `${IMG_URL}/${Math.round(Math.random() * 100)}`,
     }, {

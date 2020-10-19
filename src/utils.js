@@ -11,8 +11,10 @@ export const ratingBlock = (reviews, value = `width`) => {
 };
 
 // Отсортировать массив объектов по строковому значению keyName
-export const sortingArrayOfObjectsByStringValue = (arrayName, keyName) => {
+export const sortArrayOfObjectsByStringValue = (arrayName, keyName) => {
   arrayName.sort((a, b) => a[keyName].toLowerCase() > b[keyName].toLowerCase() ? 1 : -1);
 
   return arrayName;
 };
+
+export const filterArrayOfObjectByField = (arrayName, fieldName, value) => arrayName.filter((obj) => obj[fieldName] === value);
