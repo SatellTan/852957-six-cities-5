@@ -9,7 +9,7 @@ import {ratingBlock} from "../../utils.js";
 const OfferPage = (props) => {
   const offers = props.offers;
 
-  const currentId = +props.match.params.id.slice(1);
+  const currentId = parseInt(props.match.params.id.slice(1), 10);
   const offer = offers.find((item) => item.id === currentId);
 
   if (!offer) {
@@ -30,21 +30,6 @@ const OfferPage = (props) => {
     description,
     reviews,
   } = offer;
-
-  const premiumBlock = () => {
-    if (premium) {
-      return (
-        <div className="property__mark">
-          <span>Premium</span>
-        </div>
-      );
-    }
-    return ``;
-  };
-
-  const isFavoriteClass = () => {
-    return FavoritesList.includes(id) ? ` property__bookmark-button--active` : ``;
-  };
 
   return <React.Fragment>
     <div style={{display: `none`}}>
@@ -88,12 +73,16 @@ const OfferPage = (props) => {
           </div>
           <div className="property__container container">
             <div className="property__wrapper">
-              {premiumBlock()}
+              {premium &&
+                <div className="property__mark">
+                  <span>Premium</span>
+                </div>
+              }
               <div className="property__name-wrapper">
                 <h1 className="property__name">
                   {title}
                 </h1>
-                <button className={`property__bookmark-button button` + isFavoriteClass()} type="button">
+                <button className={`property__bookmark-button button ${FavoritesList.includes(id) ? `property__bookmark-button--active` : ``}`} type="button">
                   <svg className="property__bookmark-icon" width="31" height="33">
                     <use xlinkHref="#icon-bookmark"></use>
                   </svg>
@@ -109,7 +98,7 @@ const OfferPage = (props) => {
               </div>
               <ul className="property__features">
                 <li className="property__feature property__feature--entire">
-                  {OfferTypes.hasOwnProperty(type) ? OfferTypes[type] : ``}
+                  {type in OfferTypes ? OfferTypes[type] : ``}
                 </li>
                 <li className="property__feature property__feature--bedrooms">
                   {bedroomsNumber} Bedrooms
@@ -135,7 +124,7 @@ const OfferPage = (props) => {
               <div className="property__host">
                 <h2 className="property__host-title">Meet the host</h2>
                 <div className="property__host-user user">
-                  <div className={`property__avatar-wrapper` + (owner.super ? ` property__avatar-wrapper--pro` : ``) + ` user__avatar-wrapper`}>
+                  <div className={`property__avatar-wrapper user__avatar-wrapper ${owner.super ? ` property__avatar-wrapper--pro` : ``}`}>
                     <img className="property__avatar user__avatar" src={owner.picture ? owner.picture : ``} width="74" height="74" alt="Host avatar"/>
                   </div>
                   <span className="property__user-name">

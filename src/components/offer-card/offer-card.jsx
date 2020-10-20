@@ -17,28 +17,17 @@ const OfferCard = (props) => {
     reviews,
   } = offer;
 
-  const premiumBlock = () => {
-    if (premium) {
-      return (
-        <div className="place-card__mark">
-          <span>{`Premium`}</span>
-        </div>
-      );
-    }
-    return ``;
-  };
-
-  const isFavoriteClass = () => {
-    return FavoritesList.includes(offer.id) ? ` place-card__bookmark-button--active` : ``;
-  };
-
   return (
     <article className="cities__place-card place-card"
       onMouseEnter={(evt) => {
         evt.preventDefault();
         onOfferCardHover(offer);
       }}>
-      {premiumBlock()}
+      {premium &&
+        <div className="place-card__mark">
+          <span>{`Premium`}</span>
+        </div>
+      }
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="#">
           <img className="place-card__image" src={photos[0] ? photos[0].src : ``} width="260" height="200" alt="Place image"/>
@@ -50,7 +39,7 @@ const OfferCard = (props) => {
             <b className="place-card__price-value">&euro;{rentPrice}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className={`place-card__bookmark-button button` + isFavoriteClass()} type="button">
+          <button className={`place-card__bookmark-button button ${FavoritesList.includes(offer.id) ? `place-card__bookmark-button--active` : ``}`} type="button">
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>
             </svg>
@@ -66,7 +55,7 @@ const OfferCard = (props) => {
         <h2 className="place-card__name">
           <Link to={`/offer/:` + id} className="header__logo-link">{title}</Link>
         </h2>
-        <p className="place-card__type">{OfferTypes.hasOwnProperty(type) ? OfferTypes[type] : ``}</p>
+        <p className="place-card__type">{type in OfferTypes ? OfferTypes[type] : ``}</p>
       </div>
     </article>
   );

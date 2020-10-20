@@ -7,12 +7,14 @@ export const ratingBlock = (reviews, value = `width`) => {
     return Math.round(totalRating) * 20;
   }
 
-  return +totalRating.toFixed(2);
+  return parseInt(totalRating.toFixed(2), 10);
 };
 
 // Отсортировать массив объектов по строковому значению keyName
-export const sortingArrayOfObjectsByStringValue = (arrayName, keyName) => {
+export const sortArrayOfObjectsByStringValue = (arrayName, keyName) => {
   arrayName.sort((a, b) => a[keyName].toLowerCase() > b[keyName].toLowerCase() ? 1 : -1);
 
   return arrayName;
 };
+
+export const filterArrayOfObjectByField = (arrayName, fieldName, value) => arrayName.filter((obj) => obj[fieldName] === value);
