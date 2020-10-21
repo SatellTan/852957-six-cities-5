@@ -1,21 +1,23 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
+import ReviewsList from "../reviews-list/reviews-list";
 import CommentForm from "../comment-form/comment-form";
 import {offerType} from '../../types';
 import {OfferTypes, FavoritesList} from "../../const.js";
-import {ratingBlock} from "../../utils.js";
+import {ratingBlock, filterArrayOfObjectByField} from "../../utils.js";
 
 const OfferPage = (props) => {
-  const offers = props.offers;
+  let offers = props.offers;
 
   const currentId = parseInt(props.match.params.id.slice(1), 10);
-  const offer = offers.find((item) => item.id === currentId);
+  offers = filterArrayOfObjectByField(offers, `id`, currentId);
 
-  if (!offer) {
+  if (!offers) {
     return <h1>Not found</h1>;
   }
 
+  const offer = offers[0];
   const {
     id,
     premium,
@@ -138,31 +140,10 @@ const OfferPage = (props) => {
                 </div>
               </div>
               <section className="property__reviews reviews">
-                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">1</span></h2>
-                <ul className="reviews__list">
-                  <li className="reviews__item">
-                    <div className="reviews__user user">
-                      <div className="reviews__avatar-wrapper user__avatar-wrapper">
-                        <img className="reviews__avatar user__avatar" src={reviews[0].picture ? owner.picture : ``} width="54" height="54" alt="Reviews avatar"/>
-                      </div>
-                      <span className="reviews__user-name">
-                        {reviews[0].name}
-                      </span>
-                    </div>
-                    <div className="reviews__info">
-                      <div className="reviews__rating rating">
-                        <div className="reviews__stars rating__stars">
-                          <span style={{width: ratingBlock([Object({grade: reviews[0].grade})]) + `%`}}></span>
-                          <span className="visually-hidden">{reviews[0].grade}</span>
-                        </div>
-                      </div>
-                      <p className="reviews__text">
-                        {reviews[0].text}
-                      </p>
-                      <time className="reviews__time" dateTime="2019-04-24">{reviews[0].date}</time>
-                    </div>
-                  </li>
-                </ul>
+                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
+                <ReviewsList
+                  offer={offer}
+                />
                 <CommentForm/>
               </section>
             </div>

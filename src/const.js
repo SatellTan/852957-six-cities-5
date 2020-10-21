@@ -24,3 +24,5 @@ export const CommentSettings = {
 };
 
 export const MAP_ZOOM = 12;
+
+export const MAX_REVIEWS_IN_BLOCK = 10;
