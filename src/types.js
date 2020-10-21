@@ -29,11 +29,4 @@ export const offerType = PropTypes.shape({
     super: PropTypes.bool.isRequired,
   }).isRequired,
   reviews: PropTypes.arrayOf(reviewType).isRequired,
-  // reviews: PropTypes.arrayOf(PropTypes.shape({
-  //   picture: PropTypes.string.isRequired,
-  //   name: PropTypes.string.isRequired,
-  //   grade: PropTypes.number.isRequired,
-  //   date: PropTypes.string.isRequired,
-  //   text: PropTypes.string.isRequired,
-  // })).isRequired,
 });
