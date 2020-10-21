@@ -4,9 +4,10 @@ import {Link} from "react-router-dom";
 import ReviewsList from "../reviews-list/reviews-list";
 import CommentForm from "../comment-form/comment-form";
 import {offerType} from '../../types';
-import {OfferTypes, FavoritesList} from "../../const.js";
+import {OfferTypes, FavoritesList, OFFERS_CITIES} from "../../const.js";
 import {ratingBlock, filterArrayOfObjectByField} from "../../utils.js";
 import NearOffersList from "../near-offers-list/near-offers-list";
+import Map from "../map/map";
 
 const OfferPage = (props) => {
   let offers = props.offers;
@@ -150,7 +151,12 @@ const OfferPage = (props) => {
               </section>
             </div>
           </div>
-          <section className="property__map map"></section>
+          <section className="property__map map">
+            <Map
+              offers={nearOffers}
+              cityCenter = {OFFERS_CITIES[`Amsterdam`]}
+            />
+          </section>
         </section>
         <div className="container">
           <section className="near-places places">
