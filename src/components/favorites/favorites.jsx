@@ -123,11 +123,9 @@ const Favorites = (props) => {
                     <div className="favorites__places">
                       {offersInCity(city)}
                       {offersListInCity.map((offer) => (
-                        <React.Fragment key={`${i}-${offer.id}`}>
-                          <FavoriteOfferCard
-                            offer={offer}
-                          />
-                        </React.Fragment>
+                        <FavoriteOfferCard key={`${i}-${offer.id}`}
+                          offer={offer}
+                        />
                       ))}
                     </div>
                   </li>

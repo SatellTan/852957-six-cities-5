@@ -10,11 +10,9 @@ const NearOffersList = (props) => {
   return (
     <div className="near-places__list places__list">
       {offers.map((offer, i) => (
-        <React.Fragment key={`${i}-${offer.id}`}>
-          <NearOfferCard
-            offer={offer}
-          />
-        </React.Fragment>
+        <NearOfferCard key={`${i}-${offer.id}`}
+          offer={offer}
+        />
       ))}
     </div>
   );

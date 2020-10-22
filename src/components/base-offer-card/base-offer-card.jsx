@@ -12,7 +12,6 @@ const BaseOfferCard = (props) => {
     favoriteMark = false,
     offer,
     onOfferCardHover = null,
-    onBaseOfferCardHover = null,
     photoSizes,
   } = props;
 
@@ -26,18 +25,12 @@ const BaseOfferCard = (props) => {
     reviews,
   } = offer;
 
-  let hoverFoo = () => {
-    return undefined;
-  };
-  if (onOfferCardHover) {
-    hoverFoo = (evt) => {
-      evt.preventDefault();
-      onBaseOfferCardHover(offer);
-    };
-  }
-
   return (
-    <article className={`place-card ${className}`} onMouseEnter={hoverFoo}>
+    <article className={`place-card ${className}`}
+      onMouseEnter={(evt) => {
+        evt.preventDefault();
+        onOfferCardHover(offer);
+      }}>
       {favoriteMark && premium &&
         <div className="place-card__mark">
           <span>{`Premium`}</span>
@@ -79,7 +72,6 @@ const BaseOfferCard = (props) => {
 BaseOfferCard.propTypes = {
   offer: offerType.isRequired,
   onOfferCardHover: PropTypes.func,
-  onBaseOfferCardHover: PropTypes.func,
   className: PropTypes.string,
   imageWrapperClassName: PropTypes.string,
   infoBlockClassName: PropTypes.string,

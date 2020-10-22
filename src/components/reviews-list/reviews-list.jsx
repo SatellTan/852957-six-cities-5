@@ -15,11 +15,9 @@ const ReviewsList = (props) => {
   return (
     <ul className="reviews__list">
       {reviews.map((review, i) => (
-        <React.Fragment key={`${id}-${i}`}>
-          <Review
-            review={review}
-          />
-        </React.Fragment>
+        <Review key={`${id}-${i}`}
+          review={review}
+        />
       ))}
     </ul>
   );
