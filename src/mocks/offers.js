@@ -27,7 +27,7 @@ const AVATAR_URL = `https://api.adorable.io/avatars`;
 export default [
   {
     id: 1,
-    city: `Amsterdam`,
+    city: `Paris`,
     photos: [{
       src: `${IMG_URL}/${Math.round(Math.random() * 100)}`,
     }, {
@@ -48,7 +48,7 @@ export default [
       name: `Piter Mog`,
       super: true,
     },
-    locationCoords: [52.3909553943508, 4.85309666406198],
+    locationCoords: [48.8534, 2.3488],
     reviews: [
       {
         picture: `${AVATAR_URL}/${Math.round(Math.random() * 100)}`,

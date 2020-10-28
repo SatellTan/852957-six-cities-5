@@ -3,13 +3,12 @@ import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 import {offerType} from '../../types';
 import OffersList from "../offers-list/offers-list";
-import {OFFERS_CITIES, START_CITY} from "../../const.js";
+import CitiesList from "../cities-list/cities-list";
+import {OFFERS_CITIES} from "../../const.js";
 import Map from "../map/map";
-import {filterArrayOfObjectByField} from "../../utils.js";
 
 const Main = (props) => {
-  const {offersCount, offers} = props;
-  //offers = filterArrayOfObjectByField = ((offers, `city`, `Paris`));
+  const {city, offers, onChangeCity} = props;
 
   const returnEmptyCitiesBlock = () => {
     return (
@@ -33,7 +32,7 @@ const Main = (props) => {
         <div className="cities__places-container container">
           <section className="cities__places places">
             <h2 className="visually-hidden">Places</h2>
-            <b className="places__found">{offersCount} places to stay in Amsterdam</b>
+            <b className="places__found">{offers.length} places to stay in {city}</b>
             <form className="places__sorting" action="#" method="get">
               <span className="places__sorting-caption">Sort by</span>
               <span className="places__sorting-type" tabIndex="0">
@@ -64,18 +63,16 @@ const Main = (props) => {
 
           </section>
           <div className="cities__right-section">
-            <section className="cities__map map">
-              <Map
-                offers = {filterArrayOfObjectByField(offers, `city`, `Amsterdam`)}
-                cityCenter = {OFFERS_CITIES[`Amsterdam`]}
-              />
-            </section>
+            <Map
+              className={`cities__map`}
+              offers={offers}
+              cityCenter={OFFERS_CITIES[city]}
+            />
           </div>
         </div>
       </div>
     );
   };
-
 
   return (
     <div className="page page--gray page--main">
@@ -102,30 +99,26 @@ const Main = (props) => {
         </div>
       </header>
 
-      <main className={`page__main page__main--index ${!offers ? `page__main--index-empty` : ``}`}>
+      <main className={`page__main page__main--index ${!offers.length ? `page__main--index-empty` : ``}`}>
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <ul className="locations__list tabs__list">
-              {Object.keys(OFFERS_CITIES).map((city, i) => (
-                <li className="locations__item" key={`${i}-${city}`}>
-                  <a className={`locations__item-link tabs__item ${city === START_CITY ? `tabs__item--active` : ``}`} href="#">
-                    <span>{city}</span>
-                  </a>
-                </li>
-              ))}
-            </ul>
+            <CitiesList
+              city={city}
+              onChangeCity={onChangeCity}
+            />
           </section>
         </div>
-        {!offers ? returnEmptyCitiesBlock() : returnCitiesBlock()}
+        {!offers.length ? returnEmptyCitiesBlock() : returnCitiesBlock()}
       </main>
     </div>
   );
 };
 
 Main.propTypes = {
-  offersCount: PropTypes.number.isRequired,
   offers: PropTypes.arrayOf(offerType).isRequired,
+  city: PropTypes.string.isRequired,
+  onChangeCity: PropTypes.func.isRequired,
 };
 
 export default Main;

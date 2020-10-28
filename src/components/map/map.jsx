@@ -8,9 +8,10 @@ import {MAP_ZOOM} from '../../const';
 class Map extends PureComponent {
   constructor(props) {
     super(props);
+    this.map = null;
   }
 
-  componentDidMount() {
+  _createMap() {
     // Иконка маркера на карте
     const icon = leaflet.icon({
       iconUrl: `../../img/pin.svg`,
@@ -18,35 +19,44 @@ class Map extends PureComponent {
     });
 
     // Инициализация карты
-    const map = leaflet.map(`map`, {
+    this.map = leaflet.map(`map`, {
       center: this.props.cityCenter,
       zoom: MAP_ZOOM,
       zoomControl: false,
       marker: true
     });
-    map.setView(this.props.cityCenter, MAP_ZOOM);
+    this.map.setView(this.props.cityCenter, MAP_ZOOM);
 
     // Подключение слоя карты
     leaflet
     .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`,
         {
           attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
-        }).addTo(map);
+        }).addTo(this.map);
 
     this.props.offers.map((offer) => (
-      leaflet.marker(offer.locationCoords, {icon}).addTo(map)
+      leaflet.marker(offer.locationCoords, {icon}).addTo(this.map)
     ));
   }
 
-  render() {
+  componentDidMount() {
+    this._createMap();
+  }
 
+  componentDidUpdate() {
+    this.map.remove();
+    this._createMap();
+  }
+
+  render() {
     return (
-      <div id="map" style={{width: `100%`, height: `100%`}}></div>
+      <section id="map" className={`${this.props.className} map`}></section>
     );
   }
 }
 
 Map.propTypes = {
+  className: PropTypes.string,
   offers: PropTypes.arrayOf(offerType).isRequired,
   cityCenter: PropTypes.arrayOf(number).isRequired,
 };
