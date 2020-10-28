@@ -18,3 +18,7 @@ export const sortArrayOfObjectsByStringValue = (arrayName, keyName) => {
 };
 
 export const filterArrayOfObjectByField = (arrayName, fieldName, value) => arrayName.filter((obj) => obj[fieldName] === value);
+
+export const extend = (a, b) => {
+  return Object.assign({}, a, b);
+};

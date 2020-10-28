@@ -20,7 +20,7 @@ const OfferPage = (props) => {
     return <h1>Not found</h1>;
   }
 
-  const offer = offers[0];
+  const [offer] = offers;
   const {
     id,
     premium,

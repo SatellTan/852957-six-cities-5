@@ -21,7 +21,8 @@ class OffersList extends PureComponent {
           <React.Fragment key={`${i}-${offer.id}`}>
             <OfferCard
               offer={offer}
-              onOfferCardHover={(newActiveOffer) => {
+              onOfferCardMouseEnter={(evt, newActiveOffer) => {
+                evt.preventDefault();
                 this.setState(() => ({
                   activeOffer: newActiveOffer,
                 }));
