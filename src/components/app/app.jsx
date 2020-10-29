@@ -1,41 +1,60 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {Switch, Route, BrowserRouter} from "react-router-dom";
+import {connect} from "react-redux";
+import {ActionCreator} from "../../store/action";
+import {offerType} from '../../types';
 import Main from "../main/main";
 import AuthScreen from "../auth-screen/auth-screen";
 import OfferPage from "../offer-page/offer-page";
 import Favorites from "../favorites/favorites";
-import {offerType} from '../../types';
 
 const App = (props) => {
-  const {offersCount, offers} = props;
+  const {city, offers, allOffers, onChangeCity} = props;
 
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path="/">
           <Main
-            offersCount={offersCount}
+            city={city}
             offers={offers}
+            onChangeCity={onChangeCity}
           />
         </Route>
         <Route exact path="/favorites">
           <Favorites
-            offers={offers}
+            offers={allOffers}
           />
         </Route>
         <Route exact path="/login">
           <AuthScreen/>
         </Route>
-        <Route exact path={`/offer/:id?`} component={(currentProps) => <OfferPage offers={offers} {...currentProps}/>}/>
+        <Route exact path={`/offer/:id?`} component={(currentProps) => <OfferPage allOffers={allOffers} {...currentProps}/>}/>
       </Switch>
     </BrowserRouter>
   );
 };
 
 App.propTypes = {
-  offersCount: PropTypes.number.isRequired,
+  city: PropTypes.string.isRequired,
   offers: PropTypes.arrayOf(offerType).isRequired,
+  allOffers: PropTypes.arrayOf(offerType).isRequired,
+  onChangeCity: PropTypes.func.isRequired,
 };
 
-export default App;
+const mapStateToProps = (state) => ({
+  city: state.city,
+  offers: state.offersInCity,
+  allOffers: state.allOffers,
+});
+
+const mapDispatchToProps = (dispath) => ({
+  onChangeCity(city) {
+    dispath(ActionCreator.changeCity(city));
+    dispath(ActionCreator.getOffers(city));
+  },
+});
+
+export {App};
+export default connect(mapStateToProps, mapDispatchToProps)(App);

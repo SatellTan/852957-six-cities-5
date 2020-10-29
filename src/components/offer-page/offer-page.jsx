@@ -10,19 +10,21 @@ import NearOffersList from "../near-offers-list/near-offers-list";
 import Map from "../map/map";
 
 const OfferPage = (props) => {
-  let offers = props.offers;
+  const {match, allOffers} = props;
 
-  const currentId = parseInt(props.match.params.id.slice(1), 10);
+  let offers = allOffers;
+  const currentId = parseInt(match.params.id.slice(1), 10);
   const nearOffers = offers.slice().splice(1);
   offers = filterArrayOfObjectByField(offers, `id`, currentId);
 
-  if (!offers) {
+  if (!offers.length) {
     return <h1>Not found</h1>;
   }
 
-  const offer = offers[0];
+  const [offer] = offers;
   const {
     id,
+    city,
     premium,
     photos,
     rentPrice,
@@ -151,12 +153,11 @@ const OfferPage = (props) => {
               </section>
             </div>
           </div>
-          <section className="property__map map">
-            <Map
-              offers={nearOffers}
-              cityCenter = {OFFERS_CITIES[`Amsterdam`]}
-            />
-          </section>
+          <Map
+            className={`property__map`}
+            offers={nearOffers}
+            cityCenter={OFFERS_CITIES[city]}
+          />
         </section>
         <div className="container">
           <section className="near-places places">
@@ -172,7 +173,7 @@ const OfferPage = (props) => {
 };
 
 OfferPage.propTypes = {
-  offers: PropTypes.arrayOf(offerType).isRequired,
+  allOffers: PropTypes.arrayOf(offerType).isRequired,
   match: PropTypes.object.isRequired,
 };
 

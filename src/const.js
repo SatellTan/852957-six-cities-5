@@ -14,9 +14,9 @@ export const OfferTypes = {
   hotel: `Hotel`,
 };
 
-export const START_CITY = `Amsterdam`;
+export const START_CITY = `Paris`;
 
-export const FavoritesList = [3, 2, 4];
+export const FavoritesList = [3, 1, 4];
 
 export const CommentSettings = {
   COMMENTS_LENGTH_MIN: 50,
