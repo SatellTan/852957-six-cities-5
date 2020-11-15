@@ -8,9 +8,10 @@ import Main from "../main/main";
 import AuthScreen from "../auth-screen/auth-screen";
 import OfferPage from "../offer-page/offer-page";
 import Favorites from "../favorites/favorites";
+import {SortingTypes} from "../../const.js";
 
 const App = (props) => {
-  const {city, offers, allOffers, onChangeCity} = props;
+  const {city, offers, allOffers, onChangeCity, activeSortingType, onChangeSortingType} = props;
 
   return (
     <BrowserRouter>
@@ -20,6 +21,8 @@ const App = (props) => {
             city={city}
             offers={offers}
             onChangeCity={onChangeCity}
+            activeSortingType={activeSortingType}
+            onChangeSortingType={onChangeSortingType}
           />
         </Route>
         <Route exact path="/favorites">
@@ -41,12 +44,15 @@ App.propTypes = {
   offers: PropTypes.arrayOf(offerType).isRequired,
   allOffers: PropTypes.arrayOf(offerType).isRequired,
   onChangeCity: PropTypes.func.isRequired,
+  activeSortingType: PropTypes.oneOf(Object.values(SortingTypes)).isRequired,
+  onChangeSortingType: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
   city: state.city,
   offers: state.offersInCity,
   allOffers: state.allOffers,
+  activeSortingType: state.activeSortingType,
 });
 
 const mapDispatchToProps = (dispath) => ({
@@ -54,6 +60,17 @@ const mapDispatchToProps = (dispath) => ({
     dispath(ActionCreator.changeCity(city));
     dispath(ActionCreator.getOffers(city));
   },
+  onChangeSortingType(sortingType) {
+    dispatch(ActionCreator.changeSortingType(sortingType));
+  },
+  /*onChangeCity: (city) => {
+    dispath(ActionCreator.changeCity(city));
+    dispath(ActionCreator.getOffers(city));
+  },
+  onChangeSortingType: (sortingType) => {
+    console.log(dispath);
+    dispatch(ActionCreator.changeSortingType(sortingType));
+  },*/
 });
 
 export {App};
