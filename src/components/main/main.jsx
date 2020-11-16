@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 import {offerType} from '../../types';
 import OffersList from "../offers-list/offers-list";
 import CitiesList from "../cities-list/cities-list";
-import {OFFERS_CITIES} from "../../const.js";
+import {OFFERS_CITIES, SortingTypes} from "../../const.js";
 import Map from "../map/map";
 import Sort from "../sort/sort";
 
@@ -100,6 +100,8 @@ Main.propTypes = {
   offers: PropTypes.arrayOf(offerType).isRequired,
   city: PropTypes.string.isRequired,
   onChangeCity: PropTypes.func.isRequired,
+  activeSortingType: PropTypes.oneOf(Object.values(SortingTypes)).isRequired,
+  onChangeSortingType: PropTypes.func.isRequired
 };
 
 export default Main;

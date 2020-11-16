@@ -56,21 +56,13 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispath) => ({
-  onChangeCity(city) {
-    dispath(ActionCreator.changeCity(city));
-    dispath(ActionCreator.getOffers(city));
-  },
-  onChangeSortingType(sortingType) {
-    dispatch(ActionCreator.changeSortingType(sortingType));
-  },
-  /*onChangeCity: (city) => {
+  onChangeCity: (city) => {
     dispath(ActionCreator.changeCity(city));
     dispath(ActionCreator.getOffers(city));
   },
   onChangeSortingType: (sortingType) => {
-    console.log(dispath);
-    dispatch(ActionCreator.changeSortingType(sortingType));
-  },*/
+    dispath(ActionCreator.changeSortingType(sortingType));
+  },
 });
 
 export {App};

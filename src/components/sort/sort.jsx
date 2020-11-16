@@ -11,22 +11,22 @@ class Sort extends PureComponent {
     };
 
     this.onActiveStateChange = this.onActiveStateChange.bind(this);
-    //this.onSortingTypeClick = this.onSortingTypeClick.bind(this)
+    this.onSortingTypeClick = this.onSortingTypeClick.bind(this);
   }
 
   onActiveStateChange() {
     this.setState((prevState) => ({isActive: !prevState.isActive}));
   }
 
-  /*onSortingTypeClick (evt) {
-    debugger
-    //evt.preventDefault();
-    const sortingType = evt.target;
-    this.props.onChangeSortingType(sortingType);
-  };*/
+  onSortingTypeClick(sortingType) {
+    if (sortingType !== this.props.activeSortingType) {
+      this.props.onChangeSortingType(sortingType);
+    }
+    this.onActiveStateChange();
+  }
 
   render() {
-    const {activeSortingType, onChangeSortingType} = this.props;
+    const {activeSortingType} = this.props;
 
     return (
       <form className="places__sorting" action="#" method="get">
@@ -43,7 +43,7 @@ class Sort extends PureComponent {
               key={sortingType}
               className={`places__option ${sortingType === activeSortingType ? `places__option--active` : ``}`}
               tabIndex="0"
-              onClick={() => onChangeSortingType(sortingType)}>
+              onClick={() => this.onSortingTypeClick(sortingType)}>
               {sortingType}
             </li>
           ))}
@@ -51,11 +51,9 @@ class Sort extends PureComponent {
       </form>
     );
   }
-};
+}
 
 Sort.propTypes = {
-  //onClick={() => onChangeSortingType(sortingType)}>
-  //onClick={this.onSortingTypeClick(sortingType)}>
   activeSortingType: PropTypes.oneOf(Object.values(SortingTypes)).isRequired,
   onChangeSortingType: PropTypes.func.isRequired
 };

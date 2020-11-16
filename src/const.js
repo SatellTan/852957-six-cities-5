@@ -28,8 +28,8 @@ export const MAP_ZOOM = 12;
 export const MAX_REVIEWS_IN_BLOCK = 10;
 
 export const SortingTypes = {
-  POPULAR: `popular`,
-  TO_HIGH_PRICE: `price: low to high`,
-  TO_LOW_PRICE: `price: high to low`,
-  TOP_RATED: `top rated first`
+  POPULAR: `Popular`,
+  TO_HIGH_PRICE: `Price: low to high`,
+  TO_LOW_PRICE: `Price: high to low`,
+  TOP_RATED: `Top rated first`
 };

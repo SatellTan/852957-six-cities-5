@@ -25,7 +25,7 @@ const reducer = (state = initialState, action) => {
     case ActionType.CHANGE_SORTING_TYPE:
       return extend(state, {
         activeSortingType: action.payload,
-        offersInCity: sortOffersBySortyngType(state.offersInCity, action.payload),
+        offersInCity: sortOffersBySortyngType(filterArrayOfObjectByField(state.allOffers, `city`, state.city), action.payload),
       });
   }
 

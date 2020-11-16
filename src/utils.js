@@ -22,33 +22,29 @@ export const sortArrayOfObjectsByStringValue = (arrayName, keyName) => {
 // Отсортировать массив объектов по увеличению числового значения keyName
 const sortArrayOfObjectsByIncreasing = (arrayName, keyName) => {
   arrayName.sort((a, b) => a[keyName] - b[keyName]);
-
   return arrayName;
 };
 
 // Отсортировать массив объектов по убыванию числового значения keyName
 const sortArrayOfObjectsByDescending = (arrayName, keyName) => {
   arrayName.sort((a, b) => b[keyName] - a[keyName]);
-
   return arrayName;
 };
 
 export const sortOffersBySortyngType = (offers, sortingType) => {
+  const offersArrayNew = [...offers];
   switch (sortingType) {
     case SortingTypes.TO_HIGH_PRICE:
-      //return offers.sort((a, b) => a.price - b.price);
-      return sortArrayOfObjectsByIncreasing(offer, `price`);
+      return sortArrayOfObjectsByIncreasing(offersArrayNew, `rentPrice`);
 
     case SortingTypes.TO_LOW_PRICE:
-      //return offers.sort((a, b) => b.price - a.price);
-      return sortArrayOfObjectsByDescending(offer, `price`);
+      return sortArrayOfObjectsByDescending(offersArrayNew, `rentPrice`);
 
     case SortingTypes.TOP_RATED:
-      //return offers.sort((a, b) => b.rating - a.rating);
-      return sortArrayOfObjectsByDescending(offer, `rating`);
+      return offersArrayNew.sort((a, b) => ratingBlock(b.reviews, `rating`) - ratingBlock(a.reviews, `rating`));
   }
 
-  return offers;
+  return offersArrayNew;
 };
 
 export const filterArrayOfObjectByField = (arrayName, fieldName, value) => arrayName.filter((obj) => obj[fieldName] === value);
