@@ -25,6 +25,12 @@ export const CommentSettings = {
 
 export const MAP_ZOOM = 12;
 
+export const ICON_URL = `../../img/pin.svg`;
+
+export const ACTIVE_ICON_URL = `../../img/pin-active.svg`;
+
+export const ICON_SIZE = [30, 30];
+
 export const MAX_REVIEWS_IN_BLOCK = 10;
 
 export const SortingTypes = {

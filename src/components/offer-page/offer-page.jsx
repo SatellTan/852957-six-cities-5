@@ -156,6 +156,7 @@ const OfferPage = (props) => {
           <Map
             className={`property__map`}
             offers={nearOffers}
+            activeOffer={offer}
             cityCenter={OFFERS_CITIES[city]}
           />
         </section>

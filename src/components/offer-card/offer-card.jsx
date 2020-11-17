@@ -18,6 +18,7 @@ const OfferCard = (props) => {
 OfferCard.propTypes = {
   offer: offerType.isRequired,
   onOfferCardMouseEnter: PropTypes.func.isRequired,
+  onOfferCardMouseLeave: PropTypes.func.isRequired,
 };
 
 export default OfferCard;
