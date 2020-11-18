@@ -25,4 +25,17 @@ export const CommentSettings = {
 
 export const MAP_ZOOM = 12;
 
+export const ICON_URL = `../../img/pin.svg`;
+
+export const ACTIVE_ICON_URL = `../../img/pin-active.svg`;
+
+export const ICON_SIZE = [30, 30];
+
 export const MAX_REVIEWS_IN_BLOCK = 10;
+
+export const SortingTypes = {
+  POPULAR: `Popular`,
+  TO_HIGH_PRICE: `Price: low to high`,
+  TO_LOW_PRICE: `Price: high to low`,
+  TOP_RATED: `Top rated first`
+};

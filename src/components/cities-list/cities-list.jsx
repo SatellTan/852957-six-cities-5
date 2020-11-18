@@ -8,7 +8,8 @@ const CitiesList = (props) => {
 
   const onCityClick = (evt) => {
     evt.preventDefault();
-    const activeCity = evt.target.innerText;
+
+    const activeCity = evt.target.textContent;
 
     if (activeCity !== city) {
       onChangeCity(activeCity);

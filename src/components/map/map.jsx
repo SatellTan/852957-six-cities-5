@@ -3,20 +3,16 @@ import PropTypes, {number} from "prop-types";
 import {offerType} from '../../types';
 import leaflet from "leaflet";
 import "leaflet/dist/leaflet.css";
-import {MAP_ZOOM} from '../../const';
+import {MAP_ZOOM, ICON_URL, ACTIVE_ICON_URL, ICON_SIZE} from '../../const';
 
 class Map extends PureComponent {
   constructor(props) {
     super(props);
     this.map = null;
+    this.markers = [];
   }
 
-  _createMap() {
-    // Иконка маркера на карте
-    const icon = leaflet.icon({
-      iconUrl: `../../img/pin.svg`,
-      iconSize: [30, 30]
-    });
+  createMap() {
 
     // Инициализация карты
     this.map = leaflet.map(`map`, {
@@ -34,18 +30,48 @@ class Map extends PureComponent {
           attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
         }).addTo(this.map);
 
-    this.props.offers.map((offer) => (
-      leaflet.marker(offer.locationCoords, {icon}).addTo(this.map)
-    ));
+    this.createMarkers();
+  }
+
+  createMarkers() {
+    // Иконка маркера на карте
+    const icon = leaflet.icon({
+      iconUrl: ICON_URL,
+      iconSize: ICON_SIZE
+    });
+
+    // Иконка активного маркера на карте
+    const activeIcon = leaflet.icon({
+      iconUrl: ACTIVE_ICON_URL,
+      iconSize: ICON_SIZE
+    });
+
+    const {offers, activeOffer} = this.props;
+    // Удаляем все маркеры с карты
+    if (this.markers) {
+      this.markers.map((marker) => {
+        marker.remove();
+      });
+      this.markers.length = 0;
+    }
+
+    // Добавляем новые маркеры
+    offers.map((offer) => (this.markers.push(leaflet.marker(offer.locationCoords, {icon}))));
+    if (activeOffer.locationCoords) {
+      this.markers.push(leaflet.marker(activeOffer.locationCoords, {icon: activeIcon}));
+    }
+
+    this.markers.map((marker) => marker.addTo(this.map));
   }
 
   componentDidMount() {
-    this._createMap();
+    this.createMap();
+    this.createMarkers();
   }
 
   componentDidUpdate() {
-    this.map.remove();
-    this._createMap();
+    this.createMarkers();
+    this.map.setView(this.props.cityCenter, MAP_ZOOM);
   }
 
   render() {
@@ -58,6 +84,7 @@ class Map extends PureComponent {
 Map.propTypes = {
   className: PropTypes.string,
   offers: PropTypes.arrayOf(offerType).isRequired,
+  activeOffer: PropTypes.object,
   cityCenter: PropTypes.arrayOf(number).isRequired,
 };
 
