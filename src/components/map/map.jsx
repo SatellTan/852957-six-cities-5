@@ -57,7 +57,7 @@ class Map extends PureComponent {
 
     // Добавляем новые маркеры
     offers.map((offer) => (this.markers.push(leaflet.marker(offer.locationCoords, {icon}))));
-    if (activeOffer.locationCoords) {
+    if (activeOffer) {
       this.markers.push(leaflet.marker(activeOffer.locationCoords, {icon: activeIcon}));
     }
 
@@ -84,7 +84,7 @@ class Map extends PureComponent {
 Map.propTypes = {
   className: PropTypes.string,
   offers: PropTypes.arrayOf(offerType).isRequired,
-  activeOffer: PropTypes.object,
+  activeOffer: offerType,
   cityCenter: PropTypes.arrayOf(number).isRequired,
 };
 

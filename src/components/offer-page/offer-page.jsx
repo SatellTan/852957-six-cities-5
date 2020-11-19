@@ -8,6 +8,9 @@ import {OfferTypes, FavoritesList, OFFERS_CITIES} from "../../const.js";
 import {ratingBlock, filterArrayOfObjectByField} from "../../utils.js";
 import NearOffersList from "../near-offers-list/near-offers-list";
 import Map from "../map/map";
+import withCommentForm from "../../hocs/with-comment-form/with-comment-form";
+
+const CommentFormWrapped = withCommentForm(CommentForm);
 
 const OfferPage = (props) => {
   const {match, allOffers} = props;
@@ -149,7 +152,7 @@ const OfferPage = (props) => {
                 <ReviewsList
                   offer={offer}
                 />
-                <CommentForm/>
+                <CommentFormWrapped/>
               </section>
             </div>
           </div>
