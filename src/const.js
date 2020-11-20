@@ -39,3 +39,11 @@ export const SortingTypes = {
   TO_LOW_PRICE: `Price: high to low`,
   TOP_RATED: `Top rated first`
 };
+
+export const RatingStars = {
+  1: `terribly`,
+  2: `badly`,
+  3: `not bad`,
+  4: `good`,
+  5: `perfect`,
+};

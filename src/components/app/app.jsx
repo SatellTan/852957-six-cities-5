@@ -9,6 +9,9 @@ import AuthScreen from "../auth-screen/auth-screen";
 import OfferPage from "../offer-page/offer-page";
 import Favorites from "../favorites/favorites";
 import {SortingTypes} from "../../const.js";
+import withActiveOffer from "../../hocs/with-active-offer/with-active-offer";
+
+const MainWrapped = withActiveOffer(Main);
 
 const App = (props) => {
   const {city, offers, allOffers, onChangeCity, activeSortingType, onChangeSortingType} = props;
@@ -17,7 +20,7 @@ const App = (props) => {
     <BrowserRouter>
       <Switch>
         <Route exact path="/">
-          <Main
+          <MainWrapped
             city={city}
             offers={offers}
             onChangeCity={onChangeCity}
@@ -55,13 +58,13 @@ const mapStateToProps = (state) => ({
   activeSortingType: state.activeSortingType,
 });
 
-const mapDispatchToProps = (dispath) => ({
+const mapDispatchToProps = (dispatch) => ({
   onChangeCity: (city) => {
-    dispath(ActionCreator.changeCity(city));
-    dispath(ActionCreator.getOffers(city));
+    dispatch(ActionCreator.changeCity(city));
+    dispatch(ActionCreator.getOffers(city));
   },
   onChangeSortingType: (sortingType) => {
-    dispath(ActionCreator.changeSortingType(sortingType));
+    dispatch(ActionCreator.changeSortingType(sortingType));
   },
 });
 
