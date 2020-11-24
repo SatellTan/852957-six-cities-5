@@ -27,28 +27,39 @@ const AVATAR_URL = `https://api.adorable.io/avatars`;
 export default [
   {
     id: 1,
-    city: `Paris`,
-    photos: [{
-      src: `${IMG_URL}/${Math.round(Math.random() * 100)}`,
-    }, {
-      src: `${IMG_URL}/${Math.round(Math.random() * 100)}`,
-    }, {
-      src: `${IMG_URL}/${Math.round(Math.random() * 100)}`,
-    }],
+    city: {
+      location: {
+        latitude: 48.8534,
+        longitude: 2.3488,
+        zoom: 10,
+      },
+      name: `Paris`
+    },
+    images: [`${IMG_URL}/${Math.round(Math.random() * 100)}`,
+      `${IMG_URL}/${Math.round(Math.random() * 100)}`,
+      `${IMG_URL}/${Math.round(Math.random() * 100)}`],
     title: `Title 1. aaaaaaa bbbbb ccccccc`,
     description: `description 1 description 1 description 1 description 1 description 1 description 1 description 1 description 1`,
-    premium: false,
+    isFavorite: true,
+    isPremium: false,
     type: `apartment`,
-    bedroomsNumber: 2,
-    adultsMaxNumber: 4,
-    rentPrice: 90,
-    services: [`Wifi`, `Heating`, `Kitchen`, `Cable TV`, `Conditioning`, `Safe`],
-    owner: {
-      picture: `${AVATAR_URL}/${Math.round(Math.random() * 100)}`,
+    bedrooms: 2,
+    maxAdults: 4,
+    previewImage: `${IMG_URL}/${Math.round(Math.random() * 100)}`,
+    price: 90,
+    rating: 4,
+    goods: [`Wifi`, `Heating`, `Kitchen`, `Cable TV`, `Conditioning`, `Safe`],
+    host: {
+      avatarUrl: `${AVATAR_URL}/${Math.round(Math.random() * 100)}`,
+      id: 3,
       name: `Piter Mog`,
-      super: true,
+      isPro: true,
     },
-    locationCoords: [48.8534, 2.3488],
+    location: {
+      latitude: 48.8534,
+      longitude: 2.3488,
+      zoom: 8,
+    },
     reviews: [
       {
         picture: `${AVATAR_URL}/${Math.round(Math.random() * 100)}`,
@@ -61,35 +72,45 @@ export default [
   },
   {
     id: 2,
-    city: `Amsterdam`,
-    photos: [{
-      src: `${IMG_URL}/${Math.round(Math.random() * 100)}`,
-    }, {
-      src: `${IMG_URL}/${Math.round(Math.random() * 100)}`,
-    }, {
-      src: `${IMG_URL}/${Math.round(Math.random() * 100)}`,
-    }, {
-      src: `${IMG_URL}/${Math.round(Math.random() * 100)}`,
-    }],
+    city: {
+      location: {
+        latitude: 52.370216,
+        longitude: 4.895168,
+        zoom: 10,
+      },
+      name: `Amsterdam`
+    },
+    images: [`${IMG_URL}/${Math.round(Math.random() * 100)}`,
+      `${IMG_URL}/${Math.round(Math.random() * 100)}`,
+      `${IMG_URL}/${Math.round(Math.random() * 100)}`,
+      `${IMG_URL}/${Math.round(Math.random() * 100)}`],
     title: `Title 2. bbbbb cccccccc ddddddddddddd`,
     description: `description 2 description 2 description 2 description 2 description 2 description 2 description 2 description 2`,
-    premium: false,
+    isFavorite: false,
+    isPremium: false,
     type: `room`,
-    bedroomsNumber: 1,
-    adultsMaxNumber: 2,
-    rentPrice: 40,
-    services: [`Wifi`, `Heating`, `Cable TV`],
-    owner: {
-      picture: `${AVATAR_URL}/${Math.round(Math.random() * 100)}`,
+    bedrooms: 1,
+    maxAdults: 2,
+    previewImage: `${IMG_URL}/${Math.round(Math.random() * 100)}`,
+    price: 40,
+    rating: 2.5,
+    goods: [`Wifi`, `Heating`, `Cable TV`],
+    host: {
+      avatarUrl: `${AVATAR_URL}/${Math.round(Math.random() * 100)}`,
+      id: 4,
       name: `Susan Kors`,
-      super: false,
+      isPro: false,
     },
-    locationCoords: [52.369553943508, 4.85309666406198],
+    location: {
+      latitude: 52.369553943508,
+      longitude: 4.85309666406198,
+      zoom: 8,
+    },
     reviews: [
       {
         picture: `${AVATAR_URL}/${Math.round(Math.random() * 100)}`,
         name: `Kate P.`,
-        grade: 2,
+        grade: 3,
         date: `May 2018`,
         text: `kkkkkkkkkkkkkk kkkkkkkkkkkkkkkk kkkkkkkkkkkkkk kkkkkkkkkkkkkkkk`,
       },
@@ -104,32 +125,41 @@ export default [
   },
   {
     id: 3,
-    city: `Amsterdam`,
-    photos: [{
-      src: `${IMG_URL}/${Math.round(Math.random() * 100)}`,
-    }, {
-      src: `${IMG_URL}/${Math.round(Math.random() * 100)}`,
-    }, {
-      src: `${IMG_URL}/${Math.round(Math.random() * 100)}`,
-    }, {
-      src: `${IMG_URL}/${Math.round(Math.random() * 100)}`,
-    }, {
-      src: `${IMG_URL}/${Math.round(Math.random() * 100)}`,
-    }],
+    city: {
+      location: {
+        latitude: 52.370216,
+        longitude: 4.895168,
+        zoom: 10,
+      },
+      name: `Amsterdam`
+    },
+    images: [`${IMG_URL}/${Math.round(Math.random() * 100)}`,
+      `${IMG_URL}/${Math.round(Math.random() * 100)}`,
+      `${IMG_URL}/${Math.round(Math.random() * 100)}`,
+      `${IMG_URL}/${Math.round(Math.random() * 100)}`,
+      `${IMG_URL}/${Math.round(Math.random() * 100)}`],
     title: `Title 3. ccccccccc ddddddd eeeeeee`,
     description: `description 3 description 3 description 3 description 3 description 3 description 3 description 3 description 3`,
-    premium: true,
+    isFavorite: true,
+    isPremium: true,
     type: `house`,
-    bedroomsNumber: 4,
-    adultsMaxNumber: 9,
-    rentPrice: 400,
-    services: [`Wifi`, `Heating`, `Kitchen`, `Cable TV`, `Conditioning`, `Safe`, `Breakfast`],
-    owner: {
-      picture: `${AVATAR_URL}/${Math.round(Math.random() * 100)}`,
+    bedrooms: 4,
+    maxAdults: 9,
+    previewImage: `${IMG_URL}/${Math.round(Math.random() * 100)}`,
+    price: 400,
+    rating: 4.67,
+    goods: [`Wifi`, `Heating`, `Kitchen`, `Cable TV`, `Conditioning`, `Safe`, `Breakfast`],
+    host: {
+      avatarUrl: `${AVATAR_URL}/${Math.round(Math.random() * 100)}`,
+      id: 5,
       name: `Roy Lork`,
-      super: true,
+      isPro: true,
     },
-    locationCoords: [52.3909553943508, 4.929309666406198],
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.929309666406198,
+      zoom: 8,
+    },
     reviews: [
       {
         picture: `${AVATAR_URL}/${Math.round(Math.random() * 100)}`,
@@ -156,34 +186,42 @@ export default [
   },
   {
     id: 4,
-    city: `Amsterdam`,
-    photos: [{
-      src: `${IMG_URL}/${Math.round(Math.random() * 100)}`,
-    }, {
-      src: `${IMG_URL}/${Math.round(Math.random() * 100)}`,
-    }, {
-      src: `${IMG_URL}/${Math.round(Math.random() * 100)}`,
-    }, {
-      src: `${IMG_URL}/${Math.round(Math.random() * 100)}`,
-    }, {
-      src: `${IMG_URL}/${Math.round(Math.random() * 100)}`,
-    }, {
-      src: `${IMG_URL}/${Math.round(Math.random() * 100)}`,
-    }],
+    city: {
+      location: {
+        latitude: 52.370216,
+        longitude: 4.895168,
+        zoom: 10,
+      },
+      name: `Amsterdam`
+    },
+    images: [`${IMG_URL}/${Math.round(Math.random() * 100)}`,
+      `${IMG_URL}/${Math.round(Math.random() * 100)}`,
+      `${IMG_URL}/${Math.round(Math.random() * 100)}`,
+      `${IMG_URL}/${Math.round(Math.random() * 100)}`,
+      `${IMG_URL}/${Math.round(Math.random() * 100)}`,
+      `${IMG_URL}/${Math.round(Math.random() * 100)}`],
     title: `Title 4. dddddd eeeee ffffffffffffffffff`,
     description: `description 4 description 4 description 4 description 4 description 4 description 4 description 4 description 4`,
-    premium: false,
+    isFavorite: true,
+    isPremium: false,
     type: `hotel`,
-    bedroomsNumber: 1,
-    adultsMaxNumber: 2,
-    rentPrice: 180,
-    services: [`Wifi`, `Heating`, `Cable TV`, `Conditioning`, `Safe`, `Reception`],
-    owner: {
-      picture: `${AVATAR_URL}/${Math.round(Math.random() * 100)}`,
+    bedrooms: 1,
+    maxAdults: 2,
+    previewImage: `${IMG_URL}/${Math.round(Math.random() * 100)}`,
+    price: 180,
+    rating: 3.75,
+    goods: [`Wifi`, `Heating`, `Cable TV`, `Conditioning`, `Safe`, `Reception`],
+    host: {
+      avatarUrl: `${AVATAR_URL}/${Math.round(Math.random() * 100)}`,
+      id: 6,
       name: `John Born`,
-      super: false,
+      isPro: false,
     },
-    locationCoords: [52.3809553943508, 4.939309666406198],
+    location: {
+      latitude: 52.3809553943508,
+      longitude: 4.939309666406198,
+      zoom: 8,
+    },
     reviews: [
       {
         picture: `${AVATAR_URL}/${Math.round(Math.random() * 100)}`,

@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 import ReviewsList from "../reviews-list/reviews-list";
 import CommentForm from "../comment-form/comment-form";
 import {offerType} from '../../types';
-import {OfferTypes, FavoritesList, OFFERS_CITIES} from "../../const.js";
+import {OfferTypes} from "../../const.js";
 import {ratingBlock, filterArrayOfObjectByField} from "../../utils.js";
 import NearOffersList from "../near-offers-list/near-offers-list";
 import Map from "../map/map";
@@ -26,17 +26,18 @@ const OfferPage = (props) => {
 
   const [offer] = offers;
   const {
-    id,
     city,
-    premium,
-    photos,
-    rentPrice,
+    isPremium,
+    isFavorite,
+    images,
+    price,
+    rating,
     title,
     type,
-    bedroomsNumber,
-    adultsMaxNumber,
-    services,
-    owner,
+    bedrooms,
+    maxAdults,
+    goods,
+    host,
     description,
     reviews,
   } = offer;
@@ -74,16 +75,16 @@ const OfferPage = (props) => {
         <section className="property">
           <div className="property__gallery-container container">
             <div className="property__gallery">
-              {photos.map((photo, i) => (
-                <div key={`${i}-${photo.src}`} className="property__image-wrapper">
-                  <img className="property__image" src={photo ? photo.src : ``} alt="Photo studio"/>
+              {images.map((image, i) => (
+                <div key={`${i}-${image}`} className="property__image-wrapper">
+                  <img className="property__image" src={image} alt="Photo studio"/>
                 </div>
               ))}
             </div>
           </div>
           <div className="property__container container">
             <div className="property__wrapper">
-              {premium &&
+              {isPremium &&
                 <div className="property__mark">
                   <span>Premium</span>
                 </div>
@@ -92,7 +93,7 @@ const OfferPage = (props) => {
                 <h1 className="property__name">
                   {title}
                 </h1>
-                <button className={`property__bookmark-button button ${FavoritesList.includes(id) ? `property__bookmark-button--active` : ``}`} type="button">
+                <button className={`property__bookmark-button button ${isFavorite && `property__bookmark-button--active`}`} type="button">
                   <svg className="property__bookmark-icon" width="31" height="33">
                     <use xlinkHref="#icon-bookmark"></use>
                   </svg>
@@ -101,30 +102,30 @@ const OfferPage = (props) => {
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
-                  <span style={{width: ratingBlock(reviews) + `%`}}></span>
+                  <span style={{width: ratingBlock(rating) + `%`}}></span>
                   <span className="visually-hidden">Rating</span>
                 </div>
-                <span className="property__rating-value rating__value">{ratingBlock(reviews, `rating`)}</span>
+                <span className="property__rating-value rating__value">{ratingBlock(rating, `rating`)}</span>
               </div>
               <ul className="property__features">
                 <li className="property__feature property__feature--entire">
                   {type in OfferTypes ? OfferTypes[type] : ``}
                 </li>
                 <li className="property__feature property__feature--bedrooms">
-                  {bedroomsNumber} Bedrooms
+                  {bedrooms} Bedrooms
                 </li>
                 <li className="property__feature property__feature--adults">
-                  Max {adultsMaxNumber} adults
+                  Max {maxAdults} adults
                 </li>
               </ul>
               <div className="property__price">
-                <b className="property__price-value">&euro;{rentPrice}</b>
+                <b className="property__price-value">&euro;{price}</b>
                 <span className="property__price-text">&nbsp;night</span>
               </div>
               <div className="property__inside">
                 <h2 className="property__inside-title">What&apos;s inside</h2>
                 <ul className="property__inside-list">
-                  {services.map((service, i) => (
+                  {goods.map((service, i) => (
                     <li key={`${i}-${service[i]}`} className="property__inside-item">
                       {service}
                     </li>
@@ -134,11 +135,11 @@ const OfferPage = (props) => {
               <div className="property__host">
                 <h2 className="property__host-title">Meet the host</h2>
                 <div className="property__host-user user">
-                  <div className={`property__avatar-wrapper user__avatar-wrapper ${owner.super ? ` property__avatar-wrapper--pro` : ``}`}>
-                    <img className="property__avatar user__avatar" src={owner.picture ? owner.picture : ``} width="74" height="74" alt="Host avatar"/>
+                  <div className={`property__avatar-wrapper user__avatar-wrapper ${host.isPro ? ` property__avatar-wrapper--pro` : ``}`}>
+                    <img className="property__avatar user__avatar" src={host.avatarUrl ? host.avatarUrl : ``} width="74" height="74" alt="Host avatar"/>
                   </div>
                   <span className="property__user-name">
-                    {owner.name}
+                    {host.name}
                   </span>
                 </div>
                 <div className="property__description">
@@ -160,7 +161,7 @@ const OfferPage = (props) => {
             className={`property__map`}
             offers={nearOffers}
             activeOffer={offer}
-            cityCenter={OFFERS_CITIES[city]}
+            cityCenter={city.location}
           />
         </section>
         <div className="container">

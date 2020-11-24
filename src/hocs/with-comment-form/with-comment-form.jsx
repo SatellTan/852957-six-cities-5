@@ -16,7 +16,7 @@ const withCommentForm = (Component) => {
 
     handleInputChange(evt) {
       evt.preventDefault();
-      this.setState({grade: +evt.target.value});
+      this.setState({grade: +evt.target.dataset.value});
     }
 
     handleTextAreaChange(evt) {

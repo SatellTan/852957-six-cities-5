@@ -80,7 +80,7 @@ const Main = (props) => {
                   className={`cities__map`}
                   offers={offers}
                   activeOffer={activeOffer}
-                  cityCenter={OFFERS_CITIES[city]}
+                  cityCenter={OFFERS_CITIES[city].location}
                 />
               }
             </div>

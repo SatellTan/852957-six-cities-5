@@ -1,12 +1,12 @@
 import offers from "../mocks/offers";
 import {START_CITY, SortingTypes} from "../const.js";
-import {extend, filterArrayOfObjectByField, sortOffersBySortyngType} from "../utils";
+import {extend, filterOffersByCity, sortOffersBySortyngType} from "../utils";
 import {ActionType} from "./action";
 
 const initialState = {
   city: START_CITY,
   allOffers: offers,
-  offersInCity: filterArrayOfObjectByField(offers, `city`, START_CITY),
+  offersInCity: filterOffersByCity(offers, START_CITY),
   activeSortingType: SortingTypes.POPULAR,
 };
 
@@ -19,13 +19,13 @@ const reducer = (state = initialState, action) => {
 
     case ActionType.GET_OFFERS:
       return extend(state, {
-        offersInCity: filterArrayOfObjectByField(state.allOffers, `city`, action.payload),
+        offersInCity: filterOffersByCity(state.allOffers, action.payload),
       });
 
     case ActionType.CHANGE_SORTING_TYPE:
       return extend(state, {
         activeSortingType: action.payload,
-        offersInCity: sortOffersBySortyngType(filterArrayOfObjectByField(state.allOffers, `city`, state.city), action.payload),
+        offersInCity: sortOffersBySortyngType(filterOffersByCity(state.allOffers, state.city), action.payload),
       });
   }
 

@@ -1,9 +1,9 @@
 import React, {PureComponent} from "react";
-import PropTypes, {number} from "prop-types";
+import PropTypes from "prop-types";
 import {offerType} from '../../types';
 import leaflet from "leaflet";
 import "leaflet/dist/leaflet.css";
-import {MAP_ZOOM, ICON_URL, ACTIVE_ICON_URL, ICON_SIZE} from '../../const';
+import {ICON_URL, ACTIVE_ICON_URL, ICON_SIZE} from '../../const';
 
 class Map extends PureComponent {
   constructor(props) {
@@ -13,15 +13,19 @@ class Map extends PureComponent {
   }
 
   createMap() {
+    const {cityCenter} = this.props;
+    const cityCenterCoord = [cityCenter.latitude, cityCenter.longitude];
+    const mapZoom = cityCenter.zoom;
 
     // Инициализация карты
     this.map = leaflet.map(`map`, {
-      center: this.props.cityCenter,
-      zoom: MAP_ZOOM,
+      center: cityCenterCoord,
+      zoom: mapZoom,
       zoomControl: false,
       marker: true
     });
-    this.map.setView(this.props.cityCenter, MAP_ZOOM);
+
+    this.map.setView(cityCenterCoord, mapZoom);
 
     // Подключение слоя карты
     leaflet
@@ -34,13 +38,12 @@ class Map extends PureComponent {
   }
 
   createMarkers() {
-    // Иконка маркера на карте
+    // Иконки маркеров на карте
     const icon = leaflet.icon({
       iconUrl: ICON_URL,
       iconSize: ICON_SIZE
     });
 
-    // Иконка активного маркера на карте
     const activeIcon = leaflet.icon({
       iconUrl: ACTIVE_ICON_URL,
       iconSize: ICON_SIZE
@@ -56,9 +59,9 @@ class Map extends PureComponent {
     }
 
     // Добавляем новые маркеры
-    offers.map((offer) => (this.markers.push(leaflet.marker(offer.locationCoords, {icon}))));
+    offers.map((offer) => (this.markers.push(leaflet.marker([offer.location.latitude, offer.location.longitude], {icon}))));
     if (activeOffer) {
-      this.markers.push(leaflet.marker(activeOffer.locationCoords, {icon: activeIcon}));
+      this.markers.push(leaflet.marker([activeOffer.location.latitude, activeOffer.location.longitude], {icon: activeIcon}));
     }
 
     this.markers.map((marker) => marker.addTo(this.map));
@@ -70,8 +73,10 @@ class Map extends PureComponent {
   }
 
   componentDidUpdate() {
+    const {cityCenter} = this.props;
+
     this.createMarkers();
-    this.map.setView(this.props.cityCenter, MAP_ZOOM);
+    this.map.setView([cityCenter.latitude, cityCenter.longitude], cityCenter.zoom);
   }
 
   render() {
@@ -85,7 +90,11 @@ Map.propTypes = {
   className: PropTypes.string,
   offers: PropTypes.arrayOf(offerType).isRequired,
   activeOffer: offerType,
-  cityCenter: PropTypes.arrayOf(number).isRequired,
+  cityCenter: PropTypes.shape({
+    latitude: PropTypes.number.isRequired,
+    longitude: PropTypes.number.isRequired,
+    zoom: PropTypes.number.isRequired,
+  }).isRequired,
 };
 
 export default Map;

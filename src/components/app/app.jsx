@@ -44,7 +44,7 @@ const App = (props) => {
 
 App.propTypes = {
   city: PropTypes.string.isRequired,
-  offers: PropTypes.arrayOf(offerType).isRequired,
+  offers: PropTypes.arrayOf(offerType),
   allOffers: PropTypes.arrayOf(offerType).isRequired,
   onChangeCity: PropTypes.func.isRequired,
   activeSortingType: PropTypes.oneOf(Object.values(SortingTypes)).isRequired,

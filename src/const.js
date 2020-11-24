@@ -1,10 +1,46 @@
 export const OFFERS_CITIES = {
-  Paris: [48.8534, 2.3488],
-  Cologne: [50.9333, 6.95],
-  Brussels: [50.8504, 4.34878],
-  Amsterdam: [52.38333, 4.9],
-  Hamburg: [53.5753, 10.0153],
-  Dusseldorf: [51.2217, 6.77616],
+  Paris: {
+    location: {
+      latitude: 48.8534,
+      longitude: 2.3488,
+      zoom: 10
+    }
+  },
+  Cologne: {
+    location: {
+      latitude: 50.9333,
+      longitude: 6.95,
+      zoom: 10
+    }
+  },
+  Brussels: {
+    location: {
+      latitude: 50.8504,
+      longitude: 4.34878,
+      zoom: 10
+    }
+  },
+  Amsterdam: {
+    location: {
+      latitude: 52.370216,
+      longitude: 4.895168,
+      zoom: 10
+    }
+  },
+  Hamburg: {
+    location: {
+      latitude: 53.5753,
+      longitude: 10.0153,
+      zoom: 10
+    }
+  },
+  Dusseldorf: {
+    location: {
+      latitude: 51.2217,
+      longitude: 6.77616,
+      zoom: 10
+    }
+  },
 };
 
 export const OfferTypes = {
@@ -22,8 +58,6 @@ export const CommentSettings = {
   COMMENTS_LENGTH_MIN: 50,
   COMMENTS_LENGTH_MAX: 300,
 };
-
-export const MAP_ZOOM = 12;
 
 export const ICON_URL = `../../img/pin.svg`;
 
