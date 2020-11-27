@@ -3,11 +3,11 @@ import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 import {changeCity, changeSortingType} from "../../store/action";
+import {getActiveCity, getActiveSortingType, getSortedOffersByCity} from "../../store/selectors/selectors";
 import {offerType} from '../../types';
 import OffersList from "../offers-list/offers-list";
 import CitiesList from "../cities-list/cities-list";
 import {OFFERS_CITIES, SortingTypes} from "../../const.js";
-import {filterOffersByCity, sortOffersBySortyngType} from "../../utils";
 import Map from "../map/map";
 import Sort from "../sort/sort";
 import EmptyOffersList from "../empty-offers-list/empty-offers-list";
@@ -107,10 +107,10 @@ Main.propTypes = {
   onOfferCardMouseLeave: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = ({DATA, PROCESS}) => ({
-  offers: sortOffersBySortyngType(filterOffersByCity(DATA.allOffers, PROCESS.city), PROCESS.activeSortingType),
-  city: PROCESS.city,
-  activeSortingType: PROCESS.activeSortingType,
+const mapStateToProps = (state) => ({
+  offers: getSortedOffersByCity(state),
+  city: getActiveCity(state),
+  activeSortingType: getActiveSortingType(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
