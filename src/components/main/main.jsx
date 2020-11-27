@@ -107,10 +107,10 @@ Main.propTypes = {
   onOfferCardMouseLeave: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  offers: sortOffersBySortyngType(filterOffersByCity(state.allOffers, state.city), state.activeSortingType),
-  city: state.city,
-  activeSortingType: state.activeSortingType,
+const mapStateToProps = ({DATA, PROCESS}) => ({
+  offers: sortOffersBySortyngType(filterOffersByCity(DATA.allOffers, PROCESS.city), PROCESS.activeSortingType),
+  city: PROCESS.city,
+  activeSortingType: PROCESS.activeSortingType,
 });
 
 const mapDispatchToProps = (dispatch) => ({

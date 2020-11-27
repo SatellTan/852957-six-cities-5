@@ -39,8 +39,8 @@ App.propTypes = {
   allOffers: PropTypes.arrayOf(offerType).isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  allOffers: state.allOffers,
+const mapStateToProps = ({DATA}) => ({
+  allOffers: DATA.allOffers,
 });
 
 export {App};
