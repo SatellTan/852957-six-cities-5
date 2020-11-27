@@ -18,7 +18,7 @@ const OffersList = (props) => {
         </React.Fragment>
       ))}
     </div>
-  );
+  )
 };
 
 OffersList.propTypes = {

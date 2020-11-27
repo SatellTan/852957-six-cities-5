@@ -1,8 +1,4 @@
 import React, {PureComponent} from "react";
-import PropTypes from "prop-types";
-import {SortingTypes} from "../../const.js";
-import {offerType} from '../../types';
-
 
 const withActiveOffer = (Component) => {
   class WithActiveOffer extends PureComponent {
@@ -44,14 +40,6 @@ const withActiveOffer = (Component) => {
       );
     }
   }
-
-  WithActiveOffer.propTypes = {
-    offers: PropTypes.arrayOf(offerType).isRequired,
-    city: PropTypes.string.isRequired,
-    onChangeCity: PropTypes.func.isRequired,
-    activeSortingType: PropTypes.oneOf(Object.values(SortingTypes)).isRequired,
-    onChangeSortingType: PropTypes.func.isRequired
-  };
 
   return WithActiveOffer;
 };

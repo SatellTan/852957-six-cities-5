@@ -18,9 +18,9 @@ const BaseOfferCard = (props) => {
 
   const {
     id,
-    isPremium,
-    isFavorite,
-    previewImage,
+    is_premium,
+    is_favorite,
+    preview_image,
     price,
     rating,
     title,
@@ -35,14 +35,14 @@ const BaseOfferCard = (props) => {
       onMouseLeave={(evt) => {
         onOfferCardMouseLeave(evt);
       }}>
-      {favoriteMark && isPremium &&
+      {favoriteMark && is_premium &&
         <div className="place-card__mark">
           <span>{`Premium`}</span>
         </div>
       }
       <div className={`place-card__image-wrapper ${imageWrapperClassName}`}>
         <a href="#">
-          <img className="place-card__image" src={previewImage} width={photoSizes ? photoSizes.width : `260`} height={photoSizes ? photoSizes.height : `200`} alt="Place image"/>
+          <img className="place-card__image" src={preview_image} width={photoSizes ? photoSizes.width : `260`} height={photoSizes ? photoSizes.height : `200`} alt="Place image"/>
         </a>
       </div>
       <div className={`place-card__info ${infoBlockClassName}`}>
@@ -51,7 +51,7 @@ const BaseOfferCard = (props) => {
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className={`place-card__bookmark-button button ${isFavorite && `place-card__bookmark-button--active`}`} type="button">
+          <button className={`place-card__bookmark-button button ${is_favorite && `place-card__bookmark-button--active`}`} type="button">
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>
             </svg>

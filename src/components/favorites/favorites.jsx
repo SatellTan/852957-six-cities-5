@@ -4,7 +4,6 @@ import {Link} from "react-router-dom";
 import FavoriteOfferCard from "../favorite-offer-card/favorite-offer-card";
 import {offerType} from '../../types';
 import {FavoritesList} from "../../const.js";
-import {sortArrayOfObjectsByStringValue} from "../../utils.js";
 
 const Favorites = (props) => {
   const {offers} = props;
@@ -12,17 +11,15 @@ const Favorites = (props) => {
   // Получить массив с предложениями, которые отмечены как favorite
   const favoriteOffers = FavoritesList.map((u) => offers.find((offer) => offer.id === u));
 
-  sortArrayOfObjectsByStringValue(favoriteOffers, `city`);
-
   // Получить массив со всеми городами из списка favorite
   let favoriteCities = [];
-  favoriteOffers.map((u) => favoriteCities.push(u.city));
+  favoriteOffers.map((u) => favoriteCities.push(u.city.name));
   favoriteCities = [...new Set(favoriteCities)];
 
   // Получить все favorite offers в конкретном городе
   let offersListInCity = [];
   const offersInCity = (city) => {
-    offersListInCity = favoriteOffers.filter((offer) => offer.city === city);
+    offersListInCity = favoriteOffers.filter((offer) => offer.city.name === city);
   };
 
   if (!favoriteOffers.length) {

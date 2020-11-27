@@ -10,13 +10,6 @@ export const ratingBlock = (rating, value = `width`) => {
   return Math.round(rating);
 };
 
-// Отсортировать массив объектов по строковому значению keyName
-export const sortArrayOfObjectsByStringValue = (arrayName, keyName) => {
-  arrayName.sort((a, b) => a[keyName].toLowerCase() > b[keyName].toLowerCase() ? 1 : -1);
-
-  return arrayName;
-};
-
 // Отсортировать массив объектов по увеличению числового значения keyName
 const sortArrayOfObjectsByIncreasing = (arrayName, keyName) => {
   arrayName.sort((a, b) => a[keyName] - b[keyName]);

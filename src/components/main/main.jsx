@@ -1,10 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
+import {connect} from "react-redux";
+import {changeCity, changeSortingType} from "../../store/action";
 import {offerType} from '../../types';
 import OffersList from "../offers-list/offers-list";
 import CitiesList from "../cities-list/cities-list";
 import {OFFERS_CITIES, SortingTypes} from "../../const.js";
+import {filterOffersByCity, sortOffersBySortyngType} from "../../utils";
 import Map from "../map/map";
 import Sort from "../sort/sort";
 import EmptyOffersList from "../empty-offers-list/empty-offers-list";
@@ -22,6 +25,8 @@ const Main = (props) => {
     onOfferCardMouseEnter,
     onOfferCardMouseLeave
   } = props;
+
+  const isOffersList = offers.length > 0;
 
   return (
     <div className="page page--gray page--main">
@@ -48,7 +53,7 @@ const Main = (props) => {
         </div>
       </header>
 
-      <main className={`page__main page__main--index ${!offers.length ? `page__main--index-empty` : ``}`}>
+      <main className={`page__main page__main--index ${!isOffersList ? `page__main--index-empty` : ``}`}>
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <CitiesList
@@ -57,8 +62,8 @@ const Main = (props) => {
           />
         </div>
         <div className="cities">
-          <div className={`cities__places-container container ${!offers.length && `cities__places-container--empty`}`}>
-            {!offers.length ? <EmptyOffersList city={city}/> : (
+          <div className={`cities__places-container container ${!isOffersList && `cities__places-container--empty`}`}>
+            {!isOffersList ? <EmptyOffersList city={city}/> : (
               <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>
                 <b className="places__found">{offers.length} places to stay in {city}</b>
@@ -75,7 +80,7 @@ const Main = (props) => {
             )}
 
             <div className="cities__right-section">
-              {offers.length &&
+              {isOffersList &&
                 <Map
                   className={`cities__map`}
                   offers={offers}
@@ -102,4 +107,20 @@ Main.propTypes = {
   onOfferCardMouseLeave: PropTypes.func.isRequired,
 };
 
-export default Main;
+const mapStateToProps = (state) => ({
+  offers: sortOffersBySortyngType(filterOffersByCity(state.allOffers, state.city), state.activeSortingType),
+  city: state.city,
+  activeSortingType: state.activeSortingType,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onChangeCity: (city) => {
+    dispatch(changeCity(city));
+  },
+  onChangeSortingType: (sortingType) => {
+    dispatch(changeSortingType(sortingType));
+  },
+});
+
+export {Main};
+export default connect(mapStateToProps, mapDispatchToProps)(Main);
