@@ -22,8 +22,8 @@ const CommentForm = (props) => {
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         {Object.keys(RatingStars).reverse().map((star) => (
-          <React.Fragment key={`${star}`}>
-            <input onChange={handleInputChange} checked={grade === Number(star)} className="form__rating-input visually-hidden" name="rating" value={`${star}`} id={`${star}-stars`} type="radio"/>
+          <React.Fragment key={parseInt(star, 10)}>
+            <input onChange={handleInputChange} checked={parseInt(grade, 10) >= parseInt(star, 10)} data-value={star} className="form__rating-input visually-hidden" name="rating" id={`${star}-stars`} type="checkbox"/>
             <label htmlFor={`${star}-stars`} className="reviews__rating-label form__rating-label" title={RatingStars[star]}>
               <svg className="form__star-image" width="37" height="33">
                 <use xlinkHref="#icon-star"></use>

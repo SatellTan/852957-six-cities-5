@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 import {offerType} from '../../types';
-import {OfferTypes, FavoritesList} from "../../const.js";
+import {OfferTypes} from "../../const.js";
 import {ratingBlock} from "../../utils.js";
 
 const BaseOfferCard = (props) => {
@@ -18,12 +18,13 @@ const BaseOfferCard = (props) => {
 
   const {
     id,
-    premium,
-    photos,
-    rentPrice,
+    isPremium,
+    isFavorite,
+    previewImage,
+    price,
+    rating,
     title,
     type,
-    reviews,
   } = offer;
 
   return (
@@ -34,23 +35,23 @@ const BaseOfferCard = (props) => {
       onMouseLeave={(evt) => {
         onOfferCardMouseLeave(evt);
       }}>
-      {favoriteMark && premium &&
+      {favoriteMark && isPremium &&
         <div className="place-card__mark">
           <span>{`Premium`}</span>
         </div>
       }
       <div className={`place-card__image-wrapper ${imageWrapperClassName}`}>
         <a href="#">
-          <img className="place-card__image" src={photos[0] ? photos[0].src : ``} width={photoSizes ? photoSizes.width : `260`} height={photoSizes ? photoSizes.height : `200`} alt="Place image"/>
+          <img className="place-card__image" src={previewImage} width={photoSizes ? photoSizes.width : `260`} height={photoSizes ? photoSizes.height : `200`} alt="Place image"/>
         </a>
       </div>
       <div className={`place-card__info ${infoBlockClassName}`}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
-            <b className="place-card__price-value">&euro;{rentPrice}</b>
+            <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className={`place-card__bookmark-button button ${FavoritesList.includes(offer.id) ? `place-card__bookmark-button--active` : ``}`} type="button">
+          <button className={`place-card__bookmark-button button ${isFavorite && `place-card__bookmark-button--active`}`} type="button">
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>
             </svg>
@@ -59,7 +60,7 @@ const BaseOfferCard = (props) => {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: ratingBlock(reviews) + `%`}}></span>
+            <span style={{width: ratingBlock(rating) + `%`}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>

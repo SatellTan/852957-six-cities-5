@@ -11,22 +11,35 @@ export const reviewType = PropTypes.shape({
 
 export const offerType = PropTypes.shape({
   id: PropTypes.number.isRequired,
-  city: PropTypes.string.isRequired,
-  photos: PropTypes.arrayOf(PropTypes.shape({
-    src: PropTypes.string.isRequired,
-  })).isRequired,
+  city: PropTypes.shape({
+    location: PropTypes.shape({
+      latitude: PropTypes.number.isRequired,
+      longitude: PropTypes.number.isRequired,
+      zoom: PropTypes.number.isRequired,
+    }).isRequired,
+    name: PropTypes.string.isRequired,
+  }).isRequired,
+  images: PropTypes.arrayOf(PropTypes.string).isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
-  premium: PropTypes.bool.isRequired,
+  isFavorite: PropTypes.bool.isRequired,
+  isPremium: PropTypes.bool.isRequired,
   type: PropTypes.oneOf(Object.keys(OfferTypes)).isRequired,
-  bedroomsNumber: PropTypes.number.isRequired,
-  adultsMaxNumber: PropTypes.number.isRequired,
-  rentPrice: PropTypes.number.isRequired,
-  services: PropTypes.arrayOf(PropTypes.string).isRequired,
-  owner: PropTypes.shape({
-    picture: PropTypes.string.isRequired,
+  bedrooms: PropTypes.number.isRequired,
+  maxAdults: PropTypes.number.isRequired,
+  previewImage: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+  rating: PropTypes.number.isRequired,
+  goods: PropTypes.arrayOf(PropTypes.string).isRequired,
+  host: PropTypes.shape({
+    avatarUrl: PropTypes.string,
+    id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
-    super: PropTypes.bool.isRequired,
+    isPro: PropTypes.bool.isRequired,
   }).isRequired,
-  reviews: PropTypes.arrayOf(reviewType).isRequired,
+  location: PropTypes.shape({
+    latitude: PropTypes.number.isRequired,
+    longitude: PropTypes.number.isRequired,
+    zoom: PropTypes.number.isRequired,
+  }).isRequired,
 });

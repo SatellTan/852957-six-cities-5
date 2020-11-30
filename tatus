@@ -1,0 +1,99 @@
+[1mdiff --git a/src/components/app/app.jsx b/src/components/app/app.jsx[m
+[1mindex abad140..b96323e 100644[m
+[1m--- a/src/components/app/app.jsx[m
+[1m+++ b/src/components/app/app.jsx[m
+[36m@@ -39,6 +39,9 @@[m [mApp.propTypes = {[m
+   allOffers: PropTypes.arrayOf(offerType).isRequired,[m
+ };[m
+ [m
+[32m+[m[32m/*const mapStateToProps = ({DATA}) => ({[m
+[32m+[m[32m  allOffers: DATA.allOffers,[m
+[32m+[m[32m});*/[m
+ const mapStateToProps = (state) => ({[m
+   allOffers: state.allOffers,[m
+ });[m
+[1mdiff --git a/src/components/main/main.jsx b/src/components/main/main.jsx[m
+[1mindex fe47be3..143d817 100644[m
+[1m--- a/src/components/main/main.jsx[m
+[1m+++ b/src/components/main/main.jsx[m
+[36m@@ -26,6 +26,7 @@[m [mconst Main = (props) => {[m
+     onOfferCardMouseLeave[m
+   } = props;[m
+ [m
+[32m+[m[32m  console.log(typeof(offers))[m
+   const isOffersList = offers.length > 0;[m
+ [m
+   return ([m
+[36m@@ -107,6 +108,11 @@[m [mMain.propTypes = {[m
+   onOfferCardMouseLeave: PropTypes.func.isRequired,[m
+ };[m
+ [m
+[32m+[m[32m/*const mapStateToProps = ({DATA, PROCESS}) => ({[m
+[32m+[m[32m  offers: sortOffersBySortyngType(filterOffersByCity(DATA.allOffers, PROCESS.city), PROCESS.activeSortingType),[m
+[32m+[m[32m  city: PROCESS.city,[m
+[32m+[m[32m  activeSortingType: PROCESS.activeSortingType,[m
+[32m+[m[32m});*/[m
+ const mapStateToProps = (state) => ({[m
+   offers: sortOffersBySortyngType(filterOffersByCity(state.allOffers, state.city), state.activeSortingType),[m
+   city: state.city,[m
+[1mdiff --git a/src/index.js b/src/index.js[m
+[1mindex b98a9aa..0db07c4 100644[m
+[1m--- a/src/index.js[m
+[1m+++ b/src/index.js[m
+[36m@@ -7,6 +7,7 @@[m [mimport thunk from "redux-thunk";[m
+ import {createAPI} from "./services/api";[m
+ import App from "./components/app/app";[m
+ import {reducer} from "./store/reducer";[m
+[32m+[m[32m//import rootReducer from "./store/reducers/root-reducer";[m
+ import {requireAuthorization} from "./store/action";[m
+ import {fetchOffersList} from "./store/api-actions";[m
+ import {AuthorizationStatus} from "./const";[m
+[36m@@ -16,6 +17,7 @@[m [mconst api = createAPI([m
+ );[m
+ [m
+ const store = createStore([m
+[32m+[m[32m    //rootReducer,[m
+     reducer,[m
+     composeWithDevTools([m
+         applyMiddleware(thunk.withExtraArgument(api))[m
+[1mdiff --git a/src/store/reducers/app-data/app-data.js b/src/store/reducers/app-data/app-data.js[m
+[1mindex e69de29..7d1d33d 100644[m
+[1m--- a/src/store/reducers/app-data/app-data.js[m
+[1m+++ b/src/store/reducers/app-data/app-data.js[m
+[36m@@ -0,0 +1,19 @@[m
+[32m+[m[32mimport {extend} from "../../../utils";[m
+[32m+[m[32mimport {ActionType} from "../../action";[m
+[32m+[m
+[32m+[m[32mconst initialState = {[m
+[32m+[m[32m  allOffers: [],[m
+[32m+[m[32m};[m
+[32m+[m
+[32m+[m[32mconst appData = (state = initialState, action) => {[m
+[32m+[m[32m  switch (action.type) {[m
+[32m+[m[32m    case ActionType.LOAD_OFFERS:[m
+[32m+[m[32m      return extend(state, {[m
+[32m+[m[32m        allOffers: action.payload,[m
+[32m+[m[32m      });[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  return state;[m
+[32m+[m[32m};[m
+[32m+[m
+[32m+[m[32mexport {appData};[m
+[1mdiff --git a/src/store/reducers/app-process/app-process.js b/src/store/reducers/app-process/app-process.js[m
+[1mindex e69de29..0579cd3 100644[m
+[1m--- a/src/store/reducers/app-process/app-process.js[m
+[1m+++ b/src/store/reducers/app-process/app-process.js[m
+[36m@@ -0,0 +1,26 @@[m
+[32m+[m[32mimport {START_CITY, SortingTypes} from "../../../const.js";[m
+[32m+[m[32mimport {extend} from "../../../utils";[m
+[32m+[m[32mimport {ActionType} from "../../action";[m
+[32m+[m
+[32m+[m[32mconst initialState = {[m
+[32m+[m[32m  city: START_CITY,[m
+[32m+[m[32m  activeSortingType: SortingTypes.POPULAR,[m
+[32m+[m[32m};[m
+[32m+[m
+[32m+[m[32mconst appProcess = (state = initialState, action) => {[m
+[32m+[m[32m  switch (action.type) {[m
+[32m+[m[32m    case 

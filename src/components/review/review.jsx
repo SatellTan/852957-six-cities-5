@@ -18,7 +18,7 @@ const Review = (props) => {
       <div className="reviews__info">
         <div className="reviews__rating rating">
           <div className="reviews__stars rating__stars">
-            <span style={{width: ratingBlock([Object({grade: review.grade})]) + `%`}}></span>
+            <span style={{width: ratingBlock(review.grade) + `%`}}></span>
             <span className="visually-hidden">{review.grade}</span>
           </div>
         </div>
