@@ -1,4 +1,4 @@
-import {loadOffers} from "./action";
+import {loadOffers, requireAuthorization} from "./action";
 import {AuthorizationStatus} from "../const"
 import {adaptOffersToClient} from "./adapters/adapters";
 

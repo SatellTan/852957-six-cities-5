@@ -8,6 +8,7 @@ import SignIn from "../sign-in/sign-in";
 import OfferPage from "../offer-page/offer-page";
 import Favorites from "../favorites/favorites";
 import withActiveOffer from "../../hocs/with-active-offer/with-active-offer";
+import PrivateRoute from "../private-route/private-route";
 
 const MainWrapped = withActiveOffer(Main);
 
@@ -21,11 +22,17 @@ const App = (props) => {
           <MainWrapped
           />
         </Route>
-        <Route exact path="/favorites">
-          <Favorites
-            offers={allOffers}
-          />
-        </Route>
+        <PrivateRoute
+          exact
+          path={`/favorites`}
+          render={() => {
+            return (
+              <Favorites
+                offers={allOffers}
+              />
+            );
+          }}
+        />
         <Route exact path="/login">
           <SignIn/>
         </Route>
