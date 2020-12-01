@@ -86,3 +86,16 @@ export const RatingStars = {
   4: `good`,
   5: `perfect`,
 };
+
+export const AppRoute = {
+  LOGIN: `/login`,
+  MAIN: `/`,
+  FAVORITES: `/favorites`,
+  OFFER: `/offer/:id`,
+};
+
+export const APIRoute = {
+  OFFERS: `/hotels`,
+  LOGIN: `/login`,
+  FAVORITE: `/favorite`,
+};

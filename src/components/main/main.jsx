@@ -3,11 +3,11 @@ import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 import {changeCity, changeSortingType} from "../../store/action";
-import {getActiveCity, getActiveSortingType, getSortedOffersByCity} from "../../store/selectors/selectors";
+import {getActiveCity, getActiveSortingType, getSortedOffersByCity, getAuthorizationStatus, getAuthInfo} from "../../store/selectors/selectors";
 import {offerType} from '../../types';
 import OffersList from "../offers-list/offers-list";
 import CitiesList from "../cities-list/cities-list";
-import {OFFERS_CITIES, SortingTypes} from "../../const.js";
+import {OFFERS_CITIES, SortingTypes, AuthorizationStatus} from "../../const.js";
 import Map from "../map/map";
 import Sort from "../sort/sort";
 import EmptyOffersList from "../empty-offers-list/empty-offers-list";
@@ -23,10 +23,13 @@ const Main = (props) => {
     onChangeSortingType,
     activeOffer,
     onOfferCardMouseEnter,
-    onOfferCardMouseLeave
+    onOfferCardMouseLeave,
+    authorizationStatus,
+    authInfo,
   } = props;
 
   const isOfferListNotEmpty = offers.length > 0;
+  const isAuth = authorizationStatus === AuthorizationStatus.AUTH;
 
   return (
     <div className="page page--gray page--main">
@@ -41,10 +44,10 @@ const Main = (props) => {
             <nav className="header__nav">
               <ul className="header__nav-list">
                 <li className="header__nav-item user">
-                  <Link to="/login" className="header__nav-link header__nav-link--profile">
+                  <Link to="/favorites" className="header__nav-link header__nav-link--profile">
                     <div className="header__avatar-wrapper user__avatar-wrapper">
                     </div>
-                    <span className="header__login">Sign in</span>
+                    <span className={isAuth ? `header__user-name user__name` : `header__login`}>{isAuth ? authInfo.email : `Sign in`}</span>
                   </Link>
                 </li>
               </ul>
@@ -105,12 +108,16 @@ Main.propTypes = {
   activeOffer: offerType,
   onOfferCardMouseEnter: PropTypes.func.isRequired,
   onOfferCardMouseLeave: PropTypes.func.isRequired,
+  authorizationStatus: PropTypes.oneOf(Object.keys(AuthorizationStatus)).isRequired,
+  authInfo: PropTypes.object,
 };
 
 const mapStateToProps = (state) => ({
   offers: getSortedOffersByCity(state),
   city: getActiveCity(state),
   activeSortingType: getActiveSortingType(state),
+  authorizationStatus: getAuthorizationStatus(state),
+  authInfo: getAuthInfo(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

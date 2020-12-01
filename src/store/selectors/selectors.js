@@ -15,3 +15,7 @@ export const getSortedOffersByCity = createSelector(
       return sortOffersBySortyngType(filterOffersByCity(offers, city), sortingType);
     }
 );
+
+export const getAuthorizationStatus = (state) => state.USER.authorizationStatus;
+
+export const getAuthInfo = (state) => state.USER.authInfo;

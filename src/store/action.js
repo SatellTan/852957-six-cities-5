@@ -3,6 +3,8 @@ export const ActionType = {
   CHANGE_SORTING_TYPE: `CHANGE_SORTING_TYPE`,
   LOAD_OFFERS: `LOAD_OFFERS`,
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
+  SET_AUTH_INFO: `SET_AUTH_INFO`,
+  REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`,
 };
 
 
@@ -24,4 +26,14 @@ export const loadOffers = (offers) => ({
 export const requireAuthorization = (status) => ({
   type: ActionType.REQUIRED_AUTHORIZATION,
   payload: status,
+});
+
+export const setAuthInfo = (data) => ({
+  type: ActionType.SET_AUTH_INFO,
+  payload: data,
+});
+
+export const redirectToRoute = (url) => ({
+  type: ActionType.REDIRECT_TO_ROUTE,
+  payload: url,
 });

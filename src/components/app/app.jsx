@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {Switch, Route, BrowserRouter} from "react-router-dom";
+import {Switch, Route, Router as BrowserRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import {offerType} from '../../types';
 import Main from "../main/main";
@@ -9,6 +9,8 @@ import OfferPage from "../offer-page/offer-page";
 import Favorites from "../favorites/favorites";
 import withActiveOffer from "../../hocs/with-active-offer/with-active-offer";
 import PrivateRoute from "../private-route/private-route";
+import browserHistory from "../../browser-history";
+import {AppRoute} from "../../const";
 
 const MainWrapped = withActiveOffer(Main);
 
@@ -16,15 +18,15 @@ const App = (props) => {
   const {allOffers} = props;
 
   return (
-    <BrowserRouter>
+    <BrowserRouter history={browserHistory}>
       <Switch>
-        <Route exact path="/">
+        <Route exact path={AppRoute.MAIN}>
           <MainWrapped
           />
         </Route>
         <PrivateRoute
           exact
-          path={`/favorites`}
+          path={AppRoute.FAVORITES}
           render={() => {
             return (
               <Favorites
@@ -33,10 +35,10 @@ const App = (props) => {
             );
           }}
         />
-        <Route exact path="/login">
+        <Route exact path={AppRoute.LOGIN}>
           <SignIn/>
         </Route>
-        <Route exact path={`/offer/:id?`} component={(currentProps) => <OfferPage allOffers={allOffers} {...currentProps}/>}/>
+        <Route exact path={AppRoute.OFFER} component={(currentProps) => <OfferPage allOffers={allOffers} {...currentProps}/>}/>
       </Switch>
     </BrowserRouter>
   );
