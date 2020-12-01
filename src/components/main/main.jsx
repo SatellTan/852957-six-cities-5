@@ -26,7 +26,7 @@ const Main = (props) => {
     onOfferCardMouseLeave
   } = props;
 
-  const isOffersList = offers.length > 0;
+  const isOfferListNotEmpty = offers.length > 0;
 
   return (
     <div className="page page--gray page--main">
@@ -53,7 +53,7 @@ const Main = (props) => {
         </div>
       </header>
 
-      <main className={`page__main page__main--index ${!isOffersList ? `page__main--index-empty` : ``}`}>
+      <main className={`page__main page__main--index ${!isOfferListNotEmpty ? `page__main--index-empty` : ``}`}>
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <CitiesList
@@ -62,8 +62,8 @@ const Main = (props) => {
           />
         </div>
         <div className="cities">
-          <div className={`cities__places-container container ${!isOffersList && `cities__places-container--empty`}`}>
-            {!isOffersList ? <EmptyOffersList city={city}/> : (
+          <div className={`cities__places-container container ${!isOfferListNotEmpty && `cities__places-container--empty`}`}>
+            {!isOfferListNotEmpty ? <EmptyOffersList city={city}/> : (
               <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>
                 <b className="places__found">{offers.length} places to stay in {city}</b>
@@ -80,7 +80,7 @@ const Main = (props) => {
             )}
 
             <div className="cities__right-section">
-              {isOffersList &&
+              {isOfferListNotEmpty &&
                 <Map
                   className={`cities__map`}
                   offers={offers}

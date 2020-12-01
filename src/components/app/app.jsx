@@ -4,7 +4,7 @@ import {Switch, Route, BrowserRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import {offerType} from '../../types';
 import Main from "../main/main";
-import AuthScreen from "../auth-screen/auth-screen";
+import SignIn from "../sign-in/sign-in";
 import OfferPage from "../offer-page/offer-page";
 import Favorites from "../favorites/favorites";
 import withActiveOffer from "../../hocs/with-active-offer/with-active-offer";
@@ -27,7 +27,7 @@ const App = (props) => {
           />
         </Route>
         <Route exact path="/login">
-          <AuthScreen/>
+          <SignIn/>
         </Route>
         <Route exact path={`/offer/:id?`} component={(currentProps) => <OfferPage allOffers={allOffers} {...currentProps}/>}/>
       </Switch>

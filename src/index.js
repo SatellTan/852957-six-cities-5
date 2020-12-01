@@ -8,7 +8,7 @@ import {createAPI} from "./services/api";
 import App from "./components/app/app";
 import rootReducer from "./store/reducers/root-reducer";
 import {requireAuthorization} from "./store/action";
-import {fetchOffersList} from "./store/api-actions";
+import {fetchOffersList, checkAuth} from "./store/api-actions";
 import {AuthorizationStatus} from "./const";
 
 const api = createAPI(
@@ -23,6 +23,7 @@ const store = createStore(
 );
 
 store.dispatch(fetchOffersList());
+store.dispatch(checkAuth());
 
 ReactDOM.render(
     <Provider store={store}>
