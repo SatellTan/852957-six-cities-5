@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 import {changeCity, changeSortingType} from "../../store/action";
 import {getActiveCity, getActiveSortingType, getSortedOffersByCity, getAuthorizationStatus, getAuthInfo} from "../../store/selectors/selectors";
-import {offerType} from '../../types';
+import {offerType, authInfoType} from '../../types';
 import OffersList from "../offers-list/offers-list";
 import CitiesList from "../cities-list/cities-list";
 import {OFFERS_CITIES, SortingTypes, AuthorizationStatus} from "../../const.js";
@@ -47,7 +47,11 @@ const Main = (props) => {
                   <Link to="/favorites" className="header__nav-link header__nav-link--profile">
                     <div className="header__avatar-wrapper user__avatar-wrapper">
                     </div>
-                    <span className={isAuth ? `header__user-name user__name` : `header__login`}>{isAuth ? authInfo.email : `Sign in`}</span>
+                    {isAuth ?
+                      <span className="header__user-name user__name">{authInfo.email}</span>
+                      :
+                      <span className="header__login">Sign in</span>
+                    }
                   </Link>
                 </li>
               </ul>
@@ -109,7 +113,7 @@ Main.propTypes = {
   onOfferCardMouseEnter: PropTypes.func.isRequired,
   onOfferCardMouseLeave: PropTypes.func.isRequired,
   authorizationStatus: PropTypes.oneOf(Object.keys(AuthorizationStatus)).isRequired,
-  authInfo: PropTypes.object,
+  authInfo: authInfoType,
 };
 
 const mapStateToProps = (state) => ({

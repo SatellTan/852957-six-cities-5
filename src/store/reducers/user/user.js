@@ -13,15 +13,8 @@ const user = (state = initialState, action) => {
         authorizationStatus: action.payload,
       });
     case ActionType.SET_AUTH_INFO:
-      const userInfo = action.payload.data;
       return Object.assign({}, state, {
-        authInfo: {
-          avatarUrl: userInfo.avatar_url,
-          email: userInfo.email,
-          id: userInfo.id,
-          isPro: userInfo.is_pro,
-          name: userInfo.name,
-        }
+        authInfo: action.payload,
       });
   }
 

@@ -1,20 +1,49 @@
+const offerKeysForConvert = {
+  isPremium: `is_premium`,
+  isFavorite: `is_favorite`,
+  previewImage: `preview_image`,
+  maxAdults: `max_adults`,
+};
+
+const offerHostKeysForConvert = {
+  avatarUrl: `avatar_url`,
+  isPro: `is_pro`,
+};
+
+const authInfoKeysForConvert = {
+  avatarUrl: `avatar_url`,
+  isPro: `is_pro`,
+};
+
+export const adaptAuthInfoToClient = (data) => {
+  const authInfo = Object.assign({}, data.data);
+  сonvertKeysOfObject(authInfo, authInfoKeysForConvert);
+
+  return authInfo;
+};
+
 export const adaptOffersToClient = (offers) => {
 
   return offers.map((offer) => adaptOffer(offer));
 };
 
-const adaptOffer = (offer) => {
+const adaptOffer = (data) => {
 
-  const newHost = Object.assign({}, offer.host);
-  delete Object.assign(newHost, {[`avatarUrl`]: offer.host[`avatar_url`]})[`avatar_url`];
-  delete Object.assign(newHost, {[`isPro`]: offer.host[`is_pro`]})[`is_pro`];
+  const offer = Object.assign({}, data);
+  сonvertKeysOfObject(offer, offerKeysForConvert);
 
-  const newOffer = Object.assign({}, offer);
-  delete Object.assign(newOffer, {[`isPremium`]: offer[`is_premium`]})[`is_premium`];
-  delete Object.assign(newOffer, {[`isFavorite`]: offer[`is_favorite`]})[`is_favorite`];
-  delete Object.assign(newOffer, {[`previewImage`]: offer[`preview_image`]})[`preview_image`];
-  delete Object.assign(newOffer, {[`maxAdults`]: offer[`max_adults`]})[`max_adults`];
-  Object.assign(newOffer, {host: newHost});
+  if (offer.host) {
+    сonvertKeysOfObject(offer.host, offerHostKeysForConvert);
+  }
 
-  return newOffer;
+  return offer;
+};
+
+const toCamelCase = (target, inCamelCase, inSnakeCase) => {
+  target[inCamelCase] = target[inSnakeCase];
+  delete target[inSnakeCase];
+};
+
+const сonvertKeysOfObject = (obj, keys) => {
+  Object.entries(keys).forEach(([inSnake, inCamel]) => toCamelCase(obj, inSnake, inCamel));
 };

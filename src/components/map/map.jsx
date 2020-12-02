@@ -76,7 +76,7 @@ class Map extends PureComponent {
     const {cityCenter} = this.props;
 
     this.createMarkers();
-    this.map.setView([cityCenter.latitude, cityCenter.longitude], cityCenter.zoom);
+    this.map.setView([cityCenter.latitude, cityCenter.longitude]);
   }
 
   render() {

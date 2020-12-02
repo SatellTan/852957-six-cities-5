@@ -43,3 +43,11 @@ export const offerType = PropTypes.shape({
     zoom: PropTypes.number.isRequired,
   }).isRequired,
 });
+
+export const authInfoType = PropTypes.shape({
+  id: PropTypes.number,
+  email: PropTypes.string,
+  name: PropTypes.string,
+  avatarUrl: PropTypes.string,
+  isPro: PropTypes.bool,
+});
