@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import {OfferTypes} from "./const.js";
+import {OfferTypes, LoadingStatusForRequests} from "./const.js";
 
 export const reviewType = PropTypes.shape({
   picture: PropTypes.string.isRequired,
@@ -51,3 +51,5 @@ export const authInfoType = PropTypes.shape({
   avatarUrl: PropTypes.string,
   isPro: PropTypes.bool,
 });
+
+export const loadingStatusType = PropTypes.oneOf(Object.values(LoadingStatusForRequests));

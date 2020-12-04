@@ -1,3 +1,5 @@
+// Объекты с названиями ключей полученных данных, которые необходимо адаптировать.
+// В качестве свойств объектов - названия сопоставимых ключей после адаптации.
 const offerKeysForConvert = {
   isPremium: `is_premium`,
   isFavorite: `is_favorite`,
@@ -16,7 +18,7 @@ const authInfoKeysForConvert = {
 };
 
 export const adaptAuthInfoToClient = (data) => {
-  const authInfo = Object.assign({}, data.data);
+  const authInfo = Object.assign({}, data);
   сonvertKeysOfObject(authInfo, authInfoKeysForConvert);
 
   return authInfo;

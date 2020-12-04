@@ -117,6 +117,7 @@ Main.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
+  allOffers: getSortedOffersByCity(state),
   offers: getSortedOffersByCity(state),
   city: getActiveCity(state),
   activeSortingType: getActiveSortingType(state),

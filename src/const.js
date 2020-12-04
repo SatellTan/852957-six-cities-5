@@ -99,3 +99,10 @@ export const APIRoute = {
   LOGIN: `/login`,
   FAVORITE: `/favorite`,
 };
+
+export const LoadingStatusForRequests = {
+  IDLE: `idle`,
+  LOADING: `loading`,
+  SUCCEEDED: `succeeded`,
+  FAILED: `failed`,
+};

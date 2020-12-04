@@ -1,10 +1,16 @@
 export const ActionType = {
   CHANGE_CITY: `CHANGE_CITY`,
   CHANGE_SORTING_TYPE: `CHANGE_SORTING_TYPE`,
-  LOAD_OFFERS: `LOAD_OFFERS`,
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
-  SET_AUTH_INFO: `SET_AUTH_INFO`,
   REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`,
+
+  REQUEST_OFFERS: `REQUEST_OFFERS`,
+  REQUEST_SUCCESS_OFFERS: `REQUEST_SUCCESS_OFFERS`,
+  REQUEST_ERROR_OFFERS: `REQUEST_ERROR_OFFERS`,
+
+  REQUEST_AUTH_INFO: `REQUEST_AUTH_INFO`,
+  REQUEST_SUCCESS_AUTH_INFO: `REQUEST_SUCCESS_AUTH_INFO`,
+  REQUEST_ERROR_AUTH_INFO: `REQUEST_ERROR_AUTH_INFO`,
 };
 
 
@@ -18,19 +24,23 @@ export const changeSortingType = (sortingType) => ({
   payload: sortingType,
 });
 
-export const loadOffers = (offers) => ({
-  type: ActionType.LOAD_OFFERS,
-  payload: offers,
+export const requestAction = (dataType)=> ({
+  type: ActionType[`REQUEST_${dataType}`],
+});
+
+export const requestSuccessAction = (dataType, data)=> ({
+  type: ActionType[`REQUEST_SUCCESS_${dataType}`],
+  payload: data,
+});
+
+export const requestErrorAction = (dataType, error)=> ({
+  type: ActionType[`REQUEST_ERROR_${dataType}`],
+  payload: error,
 });
 
 export const requireAuthorization = (status) => ({
   type: ActionType.REQUIRED_AUTHORIZATION,
   payload: status,
-});
-
-export const setAuthInfo = (data) => ({
-  type: ActionType.SET_AUTH_INFO,
-  payload: data,
 });
 
 export const redirectToRoute = (url) => ({

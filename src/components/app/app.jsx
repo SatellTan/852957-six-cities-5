@@ -2,29 +2,44 @@ import React from "react";
 import PropTypes from "prop-types";
 import {Switch, Route, Router as BrowserRouter} from "react-router-dom";
 import {connect} from "react-redux";
-import {offerType} from '../../types';
+import {offerType, loadingStatusType} from '../../types';
 import Main from "../main/main";
 import SignIn from "../sign-in/sign-in";
 import OfferPage from "../offer-page/offer-page";
 import Favorites from "../favorites/favorites";
 import withActiveOffer from "../../hocs/with-active-offer/with-active-offer";
-import PrivateRoute from "../private-route/private-route";
 import browserHistory from "../../browser-history";
-import {AppRoute} from "../../const";
+import {getAllOffers, getAuthorizationStatus} from "../../store/selectors/selectors";
+import {AppRoute, AuthorizationStatus, LoadingStatusForRequests} from "../../const";
+import {withPrivateRoute} from "../../hocs/with-private-route/with-private-route";
+import {Spinner} from "../spinner/spinner";
 
-const MainWrapped = withActiveOffer(Main);
+const App = ({allOffers, allOffersLoadingStatus, authorizationStatus}) => {
 
-const App = (props) => {
-  const {allOffers} = props;
+  const MainWrapped = withActiveOffer(Main);
+  const FavoritesPrivateWrapped = withPrivateRoute(Favorites, authorizationStatus, true, AppRoute.LOGIN);
+  const SignInPrivateWrapped = withPrivateRoute(SignIn, authorizationStatus, false);
+
+  if (allOffersLoadingStatus === LoadingStatusForRequests.LOADING) {
+    return (
+      <Spinner/>
+    );
+  }
 
   return (
     <BrowserRouter history={browserHistory}>
       <Switch>
-        <Route exact path={AppRoute.MAIN}>
-          <MainWrapped
-          />
+        <Route
+          exact
+          path={AppRoute.MAIN}
+          component={MainWrapped}>
         </Route>
-        <PrivateRoute
+        <Route
+          exact
+          path={AppRoute.FAVORITES}
+          component={FavoritesPrivateWrapped}>
+        </Route>
+        {/* <PrivateRoute
           exact
           path={AppRoute.FAVORITES}
           render={() => {
@@ -34,9 +49,11 @@ const App = (props) => {
               />
             );
           }}
-        />
-        <Route exact path={AppRoute.LOGIN}>
-          <SignIn/>
+        /> */}
+        <Route
+          exact
+          path={AppRoute.LOGIN}
+          component={SignInPrivateWrapped}>
         </Route>
         <Route exact path={AppRoute.OFFER} component={(currentProps) => <OfferPage allOffers={allOffers} {...currentProps}/>}/>
       </Switch>
@@ -46,10 +63,14 @@ const App = (props) => {
 
 App.propTypes = {
   allOffers: PropTypes.arrayOf(offerType).isRequired,
+  allOffersLoadingStatus: loadingStatusType.isRequired,
+  authorizationStatus: PropTypes.oneOf(Object.keys(AuthorizationStatus)).isRequired,
 };
 
-const mapStateToProps = ({DATA}) => ({
-  allOffers: DATA.allOffers,
+const mapStateToProps = (state) => ({
+  allOffers: getAllOffers(state),
+  allOffersLoadingStatus: state.DATA.allOffers.status,
+  authorizationStatus: getAuthorizationStatus(state),
 });
 
 export {App};

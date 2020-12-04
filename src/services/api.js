@@ -5,7 +5,9 @@ const BACKEND_URL = `https://5.react.pages.academy/six-cities`;
 const REQUEST_TIMEOUT = 5000;
 
 const HttpCode = {
-  UNAUTHORIZED: 401
+  UNAUTHORIZED: 401,
+  BAD_REQUEST: 400,
+  NOT_FOUND: 404,
 };
 
 export const createAPI = (onUnauthorized) => {
@@ -22,9 +24,18 @@ export const createAPI = (onUnauthorized) => {
 
     if (response.status === HttpCode.UNAUTHORIZED) {
       onUnauthorized();
+      // Бросаем ошибку, потому что важно прервать цепочку промисов после запроса авторизации.
+      // Запрос авторизации — это особый случайб и важно дать понять приложению, что запрос был неудачным.
+      throw err;
+    }
 
-      // Бросаем ошибку, потому что нам важно прервать цепочку промисов после запроса авторизации.
-      // Запрос авторизации — это особый случай и важно дать понять приложению, что запрос был неудачным.
+    if (response.status === HttpCode.BAD_REQUEST) {
+      // alert(`Недостаточно полученной информации`);
+      throw err;
+    }
+
+    if (response.status === HttpCode.NOT_FOUND) {
+      // alert(`Not found`);
       throw err;
     }
 
