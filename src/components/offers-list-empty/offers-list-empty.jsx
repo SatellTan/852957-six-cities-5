@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from "prop-types";
 
-const EmptyOffersList = ({city}) => {
+const OffersListEmpty = ({city}) => {
 
   return (
     <section className="cities__no-places">
@@ -13,8 +13,8 @@ const EmptyOffersList = ({city}) => {
   );
 };
 
-EmptyOffersList.propTypes = {
+OffersListEmpty.propTypes = {
   city: PropTypes.string.isRequired,
 };
 
-export default EmptyOffersList;
+export default OffersListEmpty;

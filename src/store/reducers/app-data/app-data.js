@@ -18,7 +18,7 @@ const initialState = {
     status: LoadingStatusForRequests.IDLE,
     error: null,
   },
-  favorite: {
+  favorites: {
     data: [],
     status: LoadingStatusForRequests.IDLE,
     error: null,
@@ -47,6 +47,26 @@ const appData = (state = initialState, action) => {
 
     case ActionType.REQUEST_ERROR_OFFERS:
       Object.assign(state.allOffers, {
+        status: LoadingStatusForRequests.FAILED,
+        error: action.payload,
+      });
+      return extend(state);
+
+    case ActionType.REQUEST_FAVORITES:
+      Object.assign(state.favorites, {
+        status: LoadingStatusForRequests.LOADING,
+      });
+      return extend(state);
+
+    case ActionType.REQUEST_SUCCESS_FAVORITES:
+      Object.assign(state.favorites, {
+        status: LoadingStatusForRequests.SUCCEEDED,
+        data: action.payload,
+      });
+      return extend(state);
+
+    case ActionType.REQUEST_ERROR_FAVORITES:
+      Object.assign(state.favorites, {
         status: LoadingStatusForRequests.FAILED,
         error: action.payload,
       });

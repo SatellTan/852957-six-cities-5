@@ -3,6 +3,8 @@ import {filterOffersByCity, sortOffersBySortyngType} from "../../utils";
 
 export const getAllOffers = (state) => state.DATA.allOffers.data;
 
+export const getFavoritesOffers = (state) => state.DATA.favorites.data;
+
 export const getActiveCity = (state) => state.PROCESS.city;
 
 export const getActiveSortingType = (state) => state.PROCESS.activeSortingType;

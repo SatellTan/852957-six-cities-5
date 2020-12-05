@@ -1,7 +1,7 @@
 import React from "react";
-import './spinner.css';
+import './preloader.css';
 
-export const Spinner = () => {
+export const Preloader = () => {
   return (
     <div>
       <div className="circle"></div>

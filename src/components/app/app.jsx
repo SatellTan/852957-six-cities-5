@@ -12,7 +12,7 @@ import browserHistory from "../../browser-history";
 import {getAllOffers, getAuthorizationStatus} from "../../store/selectors/selectors";
 import {AppRoute, AuthorizationStatus, LoadingStatusForRequests} from "../../const";
 import {withPrivateRoute} from "../../hocs/with-private-route/with-private-route";
-import {Spinner} from "../spinner/spinner";
+import {Preloader} from "../preloader/preloader";
 
 const App = ({allOffers, allOffersLoadingStatus, authorizationStatus}) => {
 
@@ -22,7 +22,7 @@ const App = ({allOffers, allOffersLoadingStatus, authorizationStatus}) => {
 
   if (allOffersLoadingStatus === LoadingStatusForRequests.LOADING) {
     return (
-      <Spinner/>
+      <Preloader/>
     );
   }
 
@@ -39,17 +39,6 @@ const App = ({allOffers, allOffersLoadingStatus, authorizationStatus}) => {
           path={AppRoute.FAVORITES}
           component={FavoritesPrivateWrapped}>
         </Route>
-        {/* <PrivateRoute
-          exact
-          path={AppRoute.FAVORITES}
-          render={() => {
-            return (
-              <Favorites
-                offers={allOffers}
-              />
-            );
-          }}
-        /> */}
         <Route
           exact
           path={AppRoute.LOGIN}
