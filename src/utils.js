@@ -1,4 +1,5 @@
 import {SortingTypes} from "./const.js";
+import moment from "moment";
 
 // Получить округленное целое значение рейтинга либо ширину блока рейтинга
 export const ratingBlock = (rating, value = `width`) => {
@@ -12,13 +13,17 @@ export const ratingBlock = (rating, value = `width`) => {
 
 // Отсортировать массив объектов по увеличению числового значения keyName
 const sortArrayOfObjectsByIncreasing = (arrayName, keyName) => {
-  arrayName.sort((a, b) => a[keyName] - b[keyName]);
+  if (arrayName.length) {
+    arrayName.sort((a, b) => a[keyName] - b[keyName]);
+  }
   return arrayName;
 };
 
 // Отсортировать массив объектов по убыванию числового значения keyName
 const sortArrayOfObjectsByDescending = (arrayName, keyName) => {
-  arrayName.sort((a, b) => b[keyName] - a[keyName]);
+  if (arrayName.length) {
+    arrayName.sort((a, b) => b[keyName] - a[keyName]);
+  }
   return arrayName;
 };
 
@@ -43,5 +48,17 @@ export const filterArrayOfObjectByField = (arrayName, fieldName, value) => array
 export const filterOffersByCity = (offers, city) => offers.filter((obj) => obj.city.name === city);
 
 export const extend = (a, b) => {
+
   return Object.assign({}, a, b);
+};
+
+export const sortReviews = (reviews) => {
+  const reviewsArrayNew = [...reviews];
+
+  return sortArrayOfObjectsByDescending(reviewsArrayNew, `date`);
+};
+
+export const formatReviewDate = (date) => {
+
+  return moment(date).format(`MMMM YYYY`);
 };

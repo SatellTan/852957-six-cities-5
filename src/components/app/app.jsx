@@ -2,19 +2,19 @@ import React from "react";
 import PropTypes from "prop-types";
 import {Switch, Route, Router as BrowserRouter} from "react-router-dom";
 import {connect} from "react-redux";
-import {offerType, loadingStatusType} from '../../types';
+import {loadingStatusType} from '../../types';
 import Main from "../main/main";
 import SignIn from "../sign-in/sign-in";
-import OfferPage from "../offer-page/offer-page";
-import Favorites from "../favorites/favorites";
+import OfferPage from "../../hocs/with-offer-page/with-offer-page";
+import Favorites from "../../hocs/with-favorites/with-favorites";
 import withActiveOffer from "../../hocs/with-active-offer/with-active-offer";
 import browserHistory from "../../browser-history";
-import {getAllOffers, getAuthorizationStatus} from "../../store/selectors/selectors";
+import {getAuthorizationStatus, getAllOffersLoadingStatus} from "../../store/selectors/selectors";
 import {AppRoute, AuthorizationStatus, LoadingStatusForRequests} from "../../const";
 import {withPrivateRoute} from "../../hocs/with-private-route/with-private-route";
 import {Preloader} from "../preloader/preloader";
 
-const App = ({allOffers, allOffersLoadingStatus, authorizationStatus}) => {
+const App = ({allOffersLoadingStatus, authorizationStatus}) => {
 
   const MainWrapped = withActiveOffer(Main);
   const FavoritesPrivateWrapped = withPrivateRoute(Favorites, authorizationStatus, true, AppRoute.LOGIN);
@@ -44,21 +44,23 @@ const App = ({allOffers, allOffersLoadingStatus, authorizationStatus}) => {
           path={AppRoute.LOGIN}
           component={SignInPrivateWrapped}>
         </Route>
-        <Route exact path={AppRoute.OFFER} component={(currentProps) => <OfferPage allOffers={allOffers} {...currentProps}/>}/>
+        <Route
+          exact
+          path={AppRoute.OFFER}
+          component={(currentProps) => <OfferPage {...currentProps}/>}>
+        </Route>
       </Switch>
     </BrowserRouter>
   );
 };
 
 App.propTypes = {
-  allOffers: PropTypes.arrayOf(offerType).isRequired,
   allOffersLoadingStatus: loadingStatusType.isRequired,
   authorizationStatus: PropTypes.oneOf(Object.keys(AuthorizationStatus)).isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  allOffers: getAllOffers(state),
-  allOffersLoadingStatus: state.DATA.allOffers.status,
+  allOffersLoadingStatus: getAllOffersLoadingStatus(state),
   authorizationStatus: getAuthorizationStatus(state),
 });
 

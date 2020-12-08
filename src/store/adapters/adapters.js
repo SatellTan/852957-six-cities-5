@@ -7,35 +7,38 @@ const offerKeysForConvert = {
   maxAdults: `max_adults`,
 };
 
-const offerHostKeysForConvert = {
-  avatarUrl: `avatar_url`,
-  isPro: `is_pro`,
-};
-
-const authInfoKeysForConvert = {
+const userKeysForConvert = {
   avatarUrl: `avatar_url`,
   isPro: `is_pro`,
 };
 
 export const adaptAuthInfoToClient = (data) => {
   const authInfo = Object.assign({}, data);
-  сonvertKeysOfObject(authInfo, authInfoKeysForConvert);
+  сonvertKeysOfObject(authInfo, userKeysForConvert);
 
   return authInfo;
 };
 
 export const adaptOffersToClient = (offers) => {
 
-  return offers.map((offer) => adaptOffer(offer));
+  return offers.map((offer) => adaptOfferToClient(offer));
 };
 
-const adaptOffer = (data) => {
+export const adaptReviewsToClient = (reviews) => {
+  if (reviews) {
+    reviews.map((review) => сonvertKeysOfObject(review.user, userKeysForConvert));
+  }
+
+  return reviews;
+};
+
+export const adaptOfferToClient = (data) => {
 
   const offer = Object.assign({}, data);
   сonvertKeysOfObject(offer, offerKeysForConvert);
 
   if (offer.host) {
-    сonvertKeysOfObject(offer.host, offerHostKeysForConvert);
+    сonvertKeysOfObject(offer.host, userKeysForConvert);
   }
 
   return offer;

@@ -5,10 +5,18 @@ import FavoriteOfferCard from "../favorite-offer-card/favorite-offer-card";
 import FavoritesEmpty from "../favorites-empty/favorites-empty";
 import Header from "../header/header";
 import Footer from "../footer/footer";
-import {offerType} from '../../types';
-import {getFavoritesOffers} from "../../store/selectors/selectors";
+import {LoadingStatusForRequests} from "../../const.js";
+import {offerType, loadingStatusType} from '../../types';
+import {getFavoritesOffers, getFavoritesLoadingStatus} from "../../store/selectors/selectors";
+import {Preloader} from "../preloader/preloader";
 
-const Favorites = ({favoriteOffers}) => {
+const Favorites = ({favoriteOffers, favoritesLoadingStatus}) => {
+
+  if (favoritesLoadingStatus === LoadingStatusForRequests.LOADING) {
+    return (
+      <Preloader/>
+    );
+  }
 
   const isFavoritesListNotEmpty = favoriteOffers.length > 0;
 
@@ -72,10 +80,12 @@ const Favorites = ({favoriteOffers}) => {
 
 Favorites.propTypes = {
   favoriteOffers: PropTypes.arrayOf(offerType),
+  favoritesLoadingStatus: loadingStatusType.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   favoriteOffers: getFavoritesOffers(state),
+  favoritesLoadingStatus: getFavoritesLoadingStatus(state),
 });
 
 export {Favorites};

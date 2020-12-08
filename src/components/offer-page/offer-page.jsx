@@ -1,35 +1,45 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
 import ReviewsList from "../reviews-list/reviews-list";
 import CommentForm from "../comment-form/comment-form";
-import {offerType} from '../../types';
-import {OfferTypes} from "../../const.js";
-import {ratingBlock, filterArrayOfObjectByField} from "../../utils.js";
+import {loadingStatusType} from '../../types';
+import {OfferTypes, OFFER_IMAGES_COUNT_MAX, AuthorizationStatus, LoadingStatusForRequests} from "../../const.js";
+import {ratingBlock} from "../../utils.js";
+import {getOfferById, getNearOffers, getReviews, getAuthorizationStatus, getOfferLoadingStatus} from "../../store/selectors/selectors";
 import NearOffersList from "../near-offers-list/near-offers-list";
 import Map from "../map/map";
 import Header from "../header/header";
 import withCommentForm from "../../hocs/with-comment-form/with-comment-form";
+import {Preloader} from "../preloader/preloader";
 
 const CommentFormWrapped = withCommentForm(CommentForm);
 
 const OfferPage = (props) => {
-  const {match, allOffers} = props;
+  const {
+    offer,
+    nearOffers,
+    reviews,
+    authorizationStatus,
+    offerLoadingStatus
+  } = props;
 
-  let offers = allOffers;
-  const currentId = parseInt(match.params.id.slice(1), 10);
-  const nearOffers = offers.slice().splice(1);
-  offers = filterArrayOfObjectByField(offers, `id`, currentId);
+  const isAuth = authorizationStatus === AuthorizationStatus.AUTH;
 
-  if (!offers.length) {
+  if (offerLoadingStatus === LoadingStatusForRequests.LOADING) {
+    return (
+      <Preloader/>
+    );
+  }
+
+  if (!Object.keys(offer).length) {
     return <h1>Not found</h1>;
   }
 
-  const [offer] = offers;
   const {
     city,
     isPremium,
     isFavorite,
-    images,
     price,
     rating,
     title,
@@ -39,8 +49,9 @@ const OfferPage = (props) => {
     goods,
     host,
     description,
-    reviews,
   } = offer;
+
+  const images = offer.images.slice(0, Math.min(offer.images.length, OFFER_IMAGES_COUNT_MAX));
 
   return <React.Fragment>
     <div style={{display: `none`}}>
@@ -72,8 +83,8 @@ const OfferPage = (props) => {
                 <h1 className="property__name">
                   {title}
                 </h1>
-                <button className={`property__bookmark-button button ${isFavorite && `property__bookmark-button--active`}`} type="button">
-                  <svg className="property__bookmark-icon" width="31" height="33">
+                <button className={`property__bookmark-button button ${isFavorite ? `property__bookmark-button--active` : ``}`} type="button">
+                  <svg className="property__bookmark-icon place-card__bookmark-icon" width="31" height="33">
                     <use xlinkHref="#icon-bookmark"></use>
                   </svg>
                   <span className="visually-hidden">To bookmarks</span>
@@ -130,9 +141,9 @@ const OfferPage = (props) => {
               <section className="property__reviews reviews">
                 <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
                 <ReviewsList
-                  offer={offer}
+                  reviewsList={reviews}
                 />
-                <CommentFormWrapped/>
+                {isAuth && <CommentFormWrapped/>}
               </section>
             </div>
           </div>
@@ -157,8 +168,21 @@ const OfferPage = (props) => {
 };
 
 OfferPage.propTypes = {
-  allOffers: PropTypes.arrayOf(offerType).isRequired,
   match: PropTypes.object.isRequired,
+  offer: PropTypes.object,
+  nearOffers: PropTypes.array,
+  reviews: PropTypes.array,
+  authorizationStatus: PropTypes.oneOf(Object.keys(AuthorizationStatus)).isRequired,
+  offerLoadingStatus: loadingStatusType.isRequired,
 };
 
-export default OfferPage;
+const mapStateToProps = (state) => ({
+  offer: getOfferById(state),
+  nearOffers: getNearOffers(state),
+  reviews: getReviews(state),
+  authorizationStatus: getAuthorizationStatus(state),
+  offerLoadingStatus: getOfferLoadingStatus(state),
+});
+
+export {OfferPage};
+export default connect(mapStateToProps)(OfferPage);

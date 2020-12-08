@@ -1,14 +1,6 @@
 import PropTypes from "prop-types";
 import {OfferTypes, LoadingStatusForRequests} from "./const.js";
 
-export const reviewType = PropTypes.shape({
-  picture: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  grade: PropTypes.number.isRequired,
-  date: PropTypes.string.isRequired,
-  text: PropTypes.string.isRequired,
-});
-
 export const offerType = PropTypes.shape({
   id: PropTypes.number.isRequired,
   city: PropTypes.shape({
@@ -53,3 +45,16 @@ export const authInfoType = PropTypes.shape({
 });
 
 export const loadingStatusType = PropTypes.oneOf(Object.values(LoadingStatusForRequests));
+
+export const reviewType = PropTypes.shape({
+  comment: PropTypes.string.isRequired,
+  date: PropTypes.string.isRequired,
+  id: PropTypes.number,
+  rating: PropTypes.number,
+  user: PropTypes.shape({
+    avatarUrl: PropTypes.string,
+    name: PropTypes.string,
+    id: PropTypes.number,
+    isProp: PropTypes.bool
+  })
+});

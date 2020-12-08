@@ -57,7 +57,7 @@ export const AuthorizationStatus = {
 
 export const START_CITY = Object.keys(OFFERS_CITIES)[0];
 
-export const FavoritesList = [3, 1, 4];
+export const OFFER_IMAGES_COUNT_MAX = 6;
 
 export const CommentSettings = {
   COMMENTS_LENGTH_MIN: 50,
