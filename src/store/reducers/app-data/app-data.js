@@ -1,6 +1,6 @@
 import {extend} from "../../../utils";
 import {ActionType} from "../../action";
-import {LoadingStatusForRequests} from "../../../const";
+import {LoadingStatusForRequests, SendingStatusForRequests} from "../../../const";
 
 const initialState = {
   allOffers: {
@@ -26,6 +26,11 @@ const initialState = {
   favorites: {
     data: [],
     status: LoadingStatusForRequests.IDLE,
+    error: null,
+  },
+  comment: {
+    data: [],
+    status: SendingStatusForRequests.IDLE,
     error: null,
   },
 };
@@ -128,6 +133,29 @@ const appData = (state = initialState, action) => {
     case ActionType.REQUEST_ERROR_NEAR_OFFERS:
       Object.assign(state.nearOffers, {
         status: LoadingStatusForRequests.FAILED,
+        error: action.payload,
+      });
+      return extend(state);
+
+    case ActionType.SENDING_COMMENT:
+      Object.assign(state.comment, {
+        status: SendingStatusForRequests.SENDING,
+      });
+      return extend(state);
+
+    case ActionType.SENDING_SUCCESS_COMMENT:
+      Object.assign(state.comment, {
+        status: SendingStatusForRequests.SUCCEEDED,
+        data: action.payload,
+      });
+      Object.assign(state.reviews, {
+        data: action.payload,
+      });
+      return extend(state);
+
+    case ActionType.SENDING_ERROR_COMMENT:
+      Object.assign(state.comment, {
+        status: SendingStatusForRequests.FAILED,
         error: action.payload,
       });
       return extend(state);

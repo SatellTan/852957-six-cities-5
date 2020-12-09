@@ -38,3 +38,5 @@ export const getReviews = createSelector(
     getReviewsBySelector,
     (reviews) => sortReviews(reviews)
 );
+
+export const getCommentSendingStatus = (state) => state.DATA.comment.status;

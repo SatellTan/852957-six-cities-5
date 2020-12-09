@@ -27,6 +27,10 @@ export const ActionType = {
   REQUEST_NEAR_OFFERS: `REQUEST_NEAR_OFFERS`,
   REQUEST_SUCCESS_NEAR_OFFERS: `REQUEST_SUCCESS_NEAR_OFFERS`,
   REQUEST_ERROR_NEAR_OFFERS: `REQUEST_ERROR_NEAR_OFFERS`,
+
+  SENDING_COMMENT: `SENDING_COMMENT`,
+  SENDING_SUCCESS_COMMENT: `SENDING_SUCCESS_COMMENT`,
+  SENDING_ERROR_COMMENT: `SENDING_FAILURE_COMMENT`,
 };
 
 
@@ -51,6 +55,20 @@ export const requestSuccessAction = (dataType, data)=> ({
 
 export const requestErrorAction = (dataType, error)=> ({
   type: ActionType[`REQUEST_ERROR_${dataType}`],
+  payload: error,
+});
+
+export const sendingAction = (dataType)=> ({
+  type: ActionType[`SENDING_${dataType}`],
+});
+
+export const sendingSuccessAction = (dataType, data)=> ({
+  type: ActionType[`SENDING_SUCCESS_${dataType}`],
+  payload: data,
+});
+
+export const sendingErrorAction = (dataType, error)=> ({
+  type: ActionType[`SENDING_ERROR_${dataType}`],
   payload: error,
 });
 

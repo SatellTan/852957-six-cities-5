@@ -106,3 +106,10 @@ export const LoadingStatusForRequests = {
   SUCCEEDED: `succeeded`,
   FAILED: `failed`,
 };
+
+export const SendingStatusForRequests = {
+  IDLE: `idle`,
+  SENDING: `sending`,
+  SUCCEEDED: `succeeded`,
+  FAILED: `failed`,
+};

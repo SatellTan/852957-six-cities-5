@@ -7,7 +7,7 @@ import {fetchOfferById, fetchReviews, fetchNearOffers} from "../../store/api-act
 const WithOfferPage = (props) => {
   const {match} = props;
 
-  const id = parseInt(match.params.id.slice(1), 10);
+  const id = match.params.id;
   const dispatch = useDispatch();
 
   dispatch(fetchOfferById(id));

@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import {OfferTypes, LoadingStatusForRequests} from "./const.js";
+import {OfferTypes, LoadingStatusForRequests, SendingStatusForRequests} from "./const.js";
 
 export const offerType = PropTypes.shape({
   id: PropTypes.number.isRequired,
@@ -45,6 +45,8 @@ export const authInfoType = PropTypes.shape({
 });
 
 export const loadingStatusType = PropTypes.oneOf(Object.values(LoadingStatusForRequests));
+
+export const sendingStatusType = PropTypes.oneOf(Object.values(SendingStatusForRequests));
 
 export const reviewType = PropTypes.shape({
   comment: PropTypes.string.isRequired,

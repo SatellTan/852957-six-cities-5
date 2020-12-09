@@ -3,7 +3,10 @@ import {
   requestSuccessAction,
   requestErrorAction,
   requireAuthorization,
-  redirectToRoute} from "./action";
+  redirectToRoute,
+  sendingAction,
+  sendingSuccessAction,
+  sendingErrorAction} from "./action";
 import {AuthorizationStatus, AppRoute, APIRoute} from "../const";
 import {adaptOffersToClient, adaptOfferToClient, adaptReviewsToClient, adaptAuthInfoToClient} from "./adapters/adapters";
 
@@ -26,9 +29,6 @@ export const checkAuth = () => (dispatch, _getState, api) => {
     });
 };
 
-// Коды ответов:
-// 200 ОК
-// 400 Bad request
 export const login = ({login: email, password}) => (dispatch, _getState, api) => (
   api.post(APIRoute.LOGIN, {email, password})
     .then(({data}) => dispatch(requestSuccessAction(`AUTH_INFO`, adaptAuthInfoToClient(data))))
@@ -73,5 +73,15 @@ export const fetchNearOffers = (id) => (dispatch, _getState, api) => {
     .then(({data}) => dispatch(requestSuccessAction(`NEAR_OFFERS`, adaptOffersToClient(data))))
     .catch((error) => {
       dispatch(requestErrorAction(`NEAR_OFFERS`, error));
+    });
+};
+
+export const sendComment = ({offerId, comment, rating}) => (dispatch, _getState, api) => {
+  dispatch(sendingAction(`COMMENT`));
+  api.post(`/comments/${offerId}`, {comment, rating})
+    .then(({data}) => dispatch(sendingSuccessAction(`COMMENT`, adaptReviewsToClient(data))))
+    .catch((error) => {
+      dispatch(sendingErrorAction(`COMMENT`, error));
+      throw error;
     });
 };

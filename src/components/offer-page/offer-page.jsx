@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import ReviewsList from "../reviews-list/reviews-list";
-import CommentForm from "../comment-form/comment-form";
+import WithAddComment from "../../hocs/with-add-comment/with-add-comment";
 import {loadingStatusType} from '../../types';
 import {OfferTypes, OFFER_IMAGES_COUNT_MAX, AuthorizationStatus, LoadingStatusForRequests} from "../../const.js";
 import {ratingBlock} from "../../utils.js";
@@ -13,7 +13,7 @@ import Header from "../header/header";
 import withCommentForm from "../../hocs/with-comment-form/with-comment-form";
 import {Preloader} from "../preloader/preloader";
 
-const CommentFormWrapped = withCommentForm(CommentForm);
+const CommentFormWrapped = withCommentForm(WithAddComment);
 
 const OfferPage = (props) => {
   const {
@@ -37,6 +37,7 @@ const OfferPage = (props) => {
   }
 
   const {
+    id,
     city,
     isPremium,
     isFavorite,
@@ -143,7 +144,7 @@ const OfferPage = (props) => {
                 <ReviewsList
                   reviewsList={reviews}
                 />
-                {isAuth && <CommentFormWrapped/>}
+                {isAuth && <CommentFormWrapped id={id}/>}
               </section>
             </div>
           </div>
