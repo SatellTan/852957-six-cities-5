@@ -1,17 +1,21 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
+
 import ReviewsList from "../reviews-list/reviews-list";
 import WithAddComment from "../../hocs/with-add-comment/with-add-comment";
 import {loadingStatusType} from '../../types';
-import {OfferTypes, OFFER_IMAGES_COUNT_MAX, AuthorizationStatus, LoadingStatusForRequests} from "../../const.js";
+import {OfferTypes, OFFER_IMAGES_COUNT_MAX, AuthorizationStatus, LoadingStatusForRequests, FavoriteButtonType} from "../../const.js";
 import {ratingBlock} from "../../utils.js";
 import {getOfferById, getNearOffers, getReviews, getAuthorizationStatus, getOfferLoadingStatus} from "../../store/selectors/selectors";
 import NearOffersList from "../near-offers-list/near-offers-list";
 import Map from "../map/map";
 import Header from "../header/header";
 import withCommentForm from "../../hocs/with-comment-form/with-comment-form";
+import NotFoundPage from '../not-found-page/not-found-page';
 import {Preloader} from "../preloader/preloader";
+import FavoriteButton from "../favorite-button/favorite-button";
+
 
 const CommentFormWrapped = withCommentForm(WithAddComment);
 
@@ -27,13 +31,11 @@ const OfferPage = (props) => {
   const isAuth = authorizationStatus === AuthorizationStatus.AUTH;
 
   if (offerLoadingStatus === LoadingStatusForRequests.LOADING) {
-    return (
-      <Preloader/>
-    );
+    return <Preloader/>;
   }
 
-  if (!Object.keys(offer).length) {
-    return <h1>Not found</h1>;
+  if (!offer) {
+    return <NotFoundPage/>;
   }
 
   const {
@@ -84,12 +86,13 @@ const OfferPage = (props) => {
                 <h1 className="property__name">
                   {title}
                 </h1>
-                <button className={`property__bookmark-button button ${isFavorite ? `property__bookmark-button--active` : ``}`} type="button">
-                  <svg className="property__bookmark-icon place-card__bookmark-icon" width="31" height="33">
-                    <use xlinkHref="#icon-bookmark"></use>
-                  </svg>
-                  <span className="visually-hidden">To bookmarks</span>
-                </button>
+
+                <FavoriteButton
+                  offerId={id}
+                  classPrefix={`property`}
+                  isFavorite={isFavorite}
+                  buttonType={FavoriteButtonType.OFFER_PROPERTY}
+                />
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
@@ -100,7 +103,7 @@ const OfferPage = (props) => {
               </div>
               <ul className="property__features">
                 <li className="property__feature property__feature--entire">
-                  {type in OfferTypes ? OfferTypes[type] : ``}
+                  {type.toUpperCase() in OfferTypes ? OfferTypes[type.toUpperCase()] : ``}
                 </li>
                 <li className="property__feature property__feature--bedrooms">
                   {bedrooms} Bedrooms

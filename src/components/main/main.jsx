@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
+
 import {changeCity, changeSortingType} from "../../store/action";
 import {getActiveCity, getActiveSortingType, getSortedOffersByCity} from "../../store/selectors/selectors";
 import {offerType} from '../../types';
@@ -87,7 +88,6 @@ Main.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  allOffers: getSortedOffersByCity(state),
   offers: getSortedOffersByCity(state),
   city: getActiveCity(state),
   activeSortingType: getActiveSortingType(state),

@@ -1,7 +1,8 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
-import {offerType} from '../../types';
 import leaflet from "leaflet";
+
+import {offerType} from '../../types';
 import "leaflet/dist/leaflet.css";
 import {ICON_URL, ACTIVE_ICON_URL, ICON_SIZE} from '../../const';
 

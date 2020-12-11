@@ -1,6 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
+
 import {CommentSettings, RatingStars, SendingStatusForRequests} from '../../const';
 import {sendingStatusType} from '../../types';
 import {getCommentSendingStatus} from "../../store/selectors/selectors";
@@ -14,6 +15,7 @@ const CommentForm = (props) => {
     handleInputChange,
     handleTextAreaChange,
     handleFormSubmit,
+    clearState: clearForm,
   } = props;
 
   const isSending = commentSendingStatus === SendingStatusForRequests.SENDING;
@@ -30,7 +32,7 @@ const CommentForm = (props) => {
   };
 
   const onFormSubmit = (evt) => {
-    handleFormSubmit(evt, id, comment, grade);
+    handleFormSubmit(evt, id, comment, grade, clearForm);
   };
 
   return (
@@ -60,6 +62,7 @@ const CommentForm = (props) => {
         className="reviews__textarea form__textarea"
         id="review"
         name="review"
+        value={comment}
         placeholder="Tell how was your stay, what you like and what can be improved"
         disabled={isSending}
         maxLength={CommentSettings.COMMENT_LENGTH_MAX}>
@@ -82,6 +85,7 @@ CommentForm.propTypes = {
   handleTextAreaChange: PropTypes.func.isRequired,
   commentSendingStatus: sendingStatusType.isRequired,
   handleFormSubmit: PropTypes.func.isRequired,
+  clearState: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({

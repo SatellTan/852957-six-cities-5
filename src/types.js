@@ -16,7 +16,7 @@ export const offerType = PropTypes.shape({
   description: PropTypes.string.isRequired,
   isFavorite: PropTypes.bool.isRequired,
   isPremium: PropTypes.bool.isRequired,
-  type: PropTypes.oneOf(Object.keys(OfferTypes)).isRequired,
+  type: PropTypes.oneOf(Object.keys(OfferTypes).join().toLowerCase().split(`,`)).isRequired,
   bedrooms: PropTypes.number.isRequired,
   maxAdults: PropTypes.number.isRequired,
   previewImage: PropTypes.string.isRequired,

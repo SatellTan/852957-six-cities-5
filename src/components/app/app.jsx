@@ -2,13 +2,16 @@ import React from "react";
 import PropTypes from "prop-types";
 import {Switch, Route, Router as BrowserRouter} from "react-router-dom";
 import {connect} from "react-redux";
-import {loadingStatusType} from '../../types';
+
 import Main from "../main/main";
 import SignIn from "../sign-in/sign-in";
 import OfferPage from "../../hocs/with-offer-page/with-offer-page";
 import Favorites from "../../hocs/with-favorites/with-favorites";
-import withActiveOffer from "../../hocs/with-active-offer/with-active-offer";
+import NotFoundPage from '../not-found-page/not-found-page';
+
 import browserHistory from "../../browser-history";
+import {loadingStatusType} from '../../types';
+import withActiveOffer from "../../hocs/with-active-offer/with-active-offer";
 import {getAuthorizationStatus, getAllOffersLoadingStatus} from "../../store/selectors/selectors";
 import {AppRoute, AuthorizationStatus, LoadingStatusForRequests} from "../../const";
 import {withPrivateRoute} from "../../hocs/with-private-route/with-private-route";
@@ -34,21 +37,29 @@ const App = ({allOffersLoadingStatus, authorizationStatus}) => {
           path={AppRoute.MAIN}
           component={MainWrapped}>
         </Route>
+
         <Route
           exact
           path={AppRoute.FAVORITES}
           component={FavoritesPrivateWrapped}>
         </Route>
+
         <Route
           exact
           path={AppRoute.LOGIN}
           component={SignInPrivateWrapped}>
         </Route>
+
         <Route
           exact
           path={AppRoute.OFFER}
           component={(currentProps) => <OfferPage {...currentProps}/>}>
         </Route>
+
+        <Route>
+          <NotFoundPage />
+        </Route>
+
       </Switch>
     </BrowserRouter>
   );

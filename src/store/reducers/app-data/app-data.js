@@ -33,6 +33,11 @@ const initialState = {
     status: SendingStatusForRequests.IDLE,
     error: null,
   },
+  bookmark: {
+    data: [],
+    status: SendingStatusForRequests.IDLE,
+    error: null,
+  },
 };
 
 const appData = (state = initialState, action) => {
@@ -155,6 +160,40 @@ const appData = (state = initialState, action) => {
 
     case ActionType.SENDING_ERROR_COMMENT:
       Object.assign(state.comment, {
+        status: SendingStatusForRequests.FAILED,
+        error: action.payload,
+      });
+      return extend(state);
+
+    case ActionType.SENDING_BOOKMARK:
+      Object.assign(state.bookmark, {
+        status: SendingStatusForRequests.SENDING,
+      });
+      return extend(state);
+
+    case ActionType.SENDING_SUCCESS_BOOKMARK:
+      Object.assign(state.bookmark, {
+        status: SendingStatusForRequests.SUCCEEDED,
+        data: action.payload,
+      });
+
+      Object.assign(state.offer, {
+        data: action.payload,
+      });
+
+      const newAllOffersList = state.allOffers.data.map((offer) => {
+        return (offer.id === action.payload.id ? action.payload : offer);
+      });
+
+      Object.assign(state.allOffers, {
+        data: newAllOffersList,
+      });
+
+
+      return extend(state);
+
+    case ActionType.SENDING_ERROR_BOOKMARK:
+      Object.assign(state.bookmark, {
         status: SendingStatusForRequests.FAILED,
         error: action.payload,
       });

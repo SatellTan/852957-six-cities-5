@@ -30,12 +30,10 @@ export const createAPI = (onUnauthorized) => {
     }
 
     if (response.status === HttpCode.BAD_REQUEST) {
-      // alert(`Недостаточно полученной информации`);
       throw err;
     }
 
     if (response.status === HttpCode.NOT_FOUND) {
-      // alert(`Not found`);
       throw err;
     }
 

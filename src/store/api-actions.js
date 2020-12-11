@@ -76,12 +76,25 @@ export const fetchNearOffers = (id) => (dispatch, _getState, api) => {
     });
 };
 
-export const sendComment = ({offerId, comment, rating}) => (dispatch, _getState, api) => {
+export const sendComment = ({offerId, comment, rating, clearForm}) => (dispatch, _getState, api) => {
   dispatch(sendingAction(`COMMENT`));
   api.post(`/comments/${offerId}`, {comment, rating})
     .then(({data}) => dispatch(sendingSuccessAction(`COMMENT`, adaptReviewsToClient(data))))
+    .then(() => clearForm())
     .catch((error) => {
       dispatch(sendingErrorAction(`COMMENT`, error));
+      throw error;
+    });
+};
+
+export const postFavorite = (id, status) => (dispatch, _getState, api) => {
+  dispatch(sendingAction(`BOOKMARK`));
+  api.post(`/favorite/${id}/${status}`)
+    .then(({data}) => dispatch(sendingSuccessAction(`BOOKMARK`, adaptOfferToClient(data))))
+    .then(() => dispatch(fetchFavoritesList()))
+    .catch((error) => {
+      dispatch(sendingErrorAction(`BOOKMARK`, error));
+      dispatch(redirectToRoute(AppRoute.LOGIN));
       throw error;
     });
 };

@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+
 import {offerType} from '../../types';
 import NearOfferCard from "../near-offer-card/near-offer-card";
 

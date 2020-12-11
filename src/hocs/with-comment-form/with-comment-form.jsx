@@ -12,6 +12,7 @@ const withCommentForm = (Component) => {
 
       this.handleInputChange = this.handleInputChange.bind(this);
       this.handleTextAreaChange = this.handleTextAreaChange.bind(this);
+      this.clearState = this.clearState.bind(this);
     }
 
     handleInputChange(evt) {
@@ -24,6 +25,13 @@ const withCommentForm = (Component) => {
       this.setState({comment: evt.target.value});
     }
 
+    clearState() {
+      this.setState(() => ({
+        grade: 0,
+        comment: ``,
+      }));
+    }
+
     render() {
       const {grade, comment} = this.state;
 
@@ -34,6 +42,7 @@ const withCommentForm = (Component) => {
           comment={comment}
           handleInputChange={this.handleInputChange}
           handleTextAreaChange={this.handleTextAreaChange}
+          clearState={this.clearState}
         />
       );
     }

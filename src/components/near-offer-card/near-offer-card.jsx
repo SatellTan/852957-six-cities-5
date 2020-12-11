@@ -1,4 +1,5 @@
 import React from "react";
+
 import BaseOfferCard from "../base-offer-card/base-offer-card";
 import {offerType} from '../../types';
 

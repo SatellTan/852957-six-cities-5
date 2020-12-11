@@ -1,4 +1,5 @@
 import React from "react";
+
 import {ratingBlock, formatReviewDate} from "../../utils.js";
 import {reviewType} from '../../types';
 

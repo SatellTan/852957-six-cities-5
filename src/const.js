@@ -44,10 +44,10 @@ export const OFFERS_CITIES = {
 };
 
 export const OfferTypes = {
-  apartment: `Apartment`,
-  room: `Private Room`,
-  house: `House`,
-  hotel: `Hotel`,
+  APARTMENT: `Apartment`,
+  ROOM: `Private Room`,
+  HOUSE: `House`,
+  HOTEL: `Hotel`,
 };
 
 export const AuthorizationStatus = {
@@ -112,4 +112,9 @@ export const SendingStatusForRequests = {
   SENDING: `sending`,
   SUCCEEDED: `succeeded`,
   FAILED: `failed`,
+};
+
+export const FavoriteButtonType = {
+  BASE: `base`,
+  OFFER_PROPERTY: `offerProperty`,
 };

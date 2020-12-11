@@ -40,3 +40,5 @@ export const getReviews = createSelector(
 );
 
 export const getCommentSendingStatus = (state) => state.DATA.comment.status;
+
+export const getSendingBookmarkOffer = (state) => state.DATA.bookmark.data;

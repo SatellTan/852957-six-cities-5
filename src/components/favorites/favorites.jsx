@@ -1,6 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
+
 import FavoriteOfferCard from "../favorite-offer-card/favorite-offer-card";
 import FavoritesEmpty from "../favorites-empty/favorites-empty";
 import Header from "../header/header";

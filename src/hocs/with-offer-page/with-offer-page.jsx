@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {useDispatch} from 'react-redux';
+
 import OfferPage from '../../components/offer-page/offer-page';
 import {fetchOfferById, fetchReviews, fetchNearOffers} from "../../store/api-actions";
 

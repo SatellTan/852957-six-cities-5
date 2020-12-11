@@ -44,11 +44,11 @@ export const adaptOfferToClient = (data) => {
   return offer;
 };
 
-const toCamelCase = (target, inCamelCase, inSnakeCase) => {
+const castToCamelCase = (target, inCamelCase, inSnakeCase) => {
   target[inCamelCase] = target[inSnakeCase];
   delete target[inSnakeCase];
 };
 
 const сonvertKeysOfObject = (obj, keys) => {
-  Object.entries(keys).forEach(([inSnake, inCamel]) => toCamelCase(obj, inSnake, inCamel));
+  Object.entries(keys).forEach(([inCamelCase, inSnakeCase]) => castToCamelCase(obj, inCamelCase, inSnakeCase));
 };
