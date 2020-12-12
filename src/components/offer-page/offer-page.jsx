@@ -5,9 +5,9 @@ import {connect} from "react-redux";
 import ReviewsList from "../reviews-list/reviews-list";
 import WithAddComment from "../../hocs/with-add-comment/with-add-comment";
 import {loadingStatusType} from '../../types';
-import {OfferTypes, OFFER_IMAGES_COUNT_MAX, AuthorizationStatus, LoadingStatusForRequests, FavoriteButtonType} from "../../const.js";
+import {OfferTypes, OFFER_IMAGES_COUNT_MAX, LoadingStatusForRequests, FavoriteButtonType} from "../../const.js";
 import {ratingBlock} from "../../utils.js";
-import {getOfferById, getNearOffers, getReviews, getAuthorizationStatus, getOfferLoadingStatus} from "../../store/selectors/selectors";
+import {getIsAuth, getOfferById, getNearestOffers, getReviews, getOfferLoadingStatus} from "../../store/selectors/selectors";
 import NearOffersList from "../near-offers-list/near-offers-list";
 import Map from "../map/map";
 import Header from "../header/header";
@@ -24,11 +24,9 @@ const OfferPage = (props) => {
     offer,
     nearOffers,
     reviews,
-    authorizationStatus,
+    isAuth,
     offerLoadingStatus
   } = props;
-
-  const isAuth = authorizationStatus === AuthorizationStatus.AUTH;
 
   if (offerLoadingStatus === LoadingStatusForRequests.LOADING) {
     return <Preloader/>;
@@ -176,15 +174,15 @@ OfferPage.propTypes = {
   offer: PropTypes.object,
   nearOffers: PropTypes.array,
   reviews: PropTypes.array,
-  authorizationStatus: PropTypes.oneOf(Object.keys(AuthorizationStatus)).isRequired,
+  isAuth: PropTypes.bool.isRequired,
   offerLoadingStatus: loadingStatusType.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   offer: getOfferById(state),
-  nearOffers: getNearOffers(state),
+  nearOffers: getNearestOffers(state),
   reviews: getReviews(state),
-  authorizationStatus: getAuthorizationStatus(state),
+  isAuth: getIsAuth(state),
   offerLoadingStatus: getOfferLoadingStatus(state),
 });
 

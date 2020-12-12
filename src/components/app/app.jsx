@@ -12,16 +12,16 @@ import NotFoundPage from '../not-found-page/not-found-page';
 import browserHistory from "../../browser-history";
 import {loadingStatusType} from '../../types';
 import withActiveOffer from "../../hocs/with-active-offer/with-active-offer";
-import {getAuthorizationStatus, getAllOffersLoadingStatus} from "../../store/selectors/selectors";
-import {AppRoute, AuthorizationStatus, LoadingStatusForRequests} from "../../const";
+import {getIsAuth, getAllOffersLoadingStatus} from "../../store/selectors/selectors";
+import {AppRoute, LoadingStatusForRequests} from "../../const";
 import {withPrivateRoute} from "../../hocs/with-private-route/with-private-route";
 import {Preloader} from "../preloader/preloader";
 
-const App = ({allOffersLoadingStatus, authorizationStatus}) => {
+const App = ({allOffersLoadingStatus, isAuth}) => {
 
   const MainWrapped = withActiveOffer(Main);
-  const FavoritesPrivateWrapped = withPrivateRoute(Favorites, authorizationStatus, true, AppRoute.LOGIN);
-  const SignInPrivateWrapped = withPrivateRoute(SignIn, authorizationStatus, false);
+  const FavoritesPrivateWrapped = withPrivateRoute(Favorites, isAuth, true, AppRoute.LOGIN);
+  const SignInPrivateWrapped = withPrivateRoute(SignIn, isAuth, false);
 
   if (allOffersLoadingStatus === LoadingStatusForRequests.LOADING) {
     return (
@@ -67,12 +67,12 @@ const App = ({allOffersLoadingStatus, authorizationStatus}) => {
 
 App.propTypes = {
   allOffersLoadingStatus: loadingStatusType.isRequired,
-  authorizationStatus: PropTypes.oneOf(Object.keys(AuthorizationStatus)).isRequired,
+  isAuth: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   allOffersLoadingStatus: getAllOffersLoadingStatus(state),
-  authorizationStatus: getAuthorizationStatus(state),
+  isAuth: getIsAuth(state),
 });
 
 export {App};

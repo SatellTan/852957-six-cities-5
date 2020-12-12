@@ -11,8 +11,8 @@ const ReviewsList = ({reviewsList}) => {
 
   return (
     <ul className="reviews__list">
-      {reviews.map((review, i) => (
-        <Review key={`${i}`}
+      {reviews.map((review) => (
+        <Review key={review.id}
           review={review}
         />
       ))}

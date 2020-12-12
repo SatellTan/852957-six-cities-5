@@ -3,6 +3,7 @@ export const ActionType = {
   CHANGE_SORTING_TYPE: `CHANGE_SORTING_TYPE`,
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
   REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`,
+  REPLACE_OFFER: `REPLACE_OFFER`,
 
   REQUEST_OFFERS: `REQUEST_OFFERS`,
   REQUEST_SUCCESS_OFFERS: `REQUEST_SUCCESS_OFFERS`,
@@ -84,4 +85,9 @@ export const requireAuthorization = (status) => ({
 export const redirectToRoute = (url) => ({
   type: ActionType.REDIRECT_TO_ROUTE,
   payload: url,
+});
+
+export const replaceOffer = (data)=> ({
+  type: ActionType.REPLACE_OFFER,
+  payload: data,
 });

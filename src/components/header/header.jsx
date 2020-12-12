@@ -2,13 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
-import {AppRoute, AuthorizationStatus} from "../../const";
+import {AppRoute} from "../../const";
 import {authInfoType} from '../../types';
-import {getAuthorizationStatus, getAuthInfo} from "../../store/selectors/selectors";
+import {getIsAuth, getAuthInfo} from "../../store/selectors/selectors";
 
-const Header = ({authorizationStatus, authInfo}) => {
-
-  const isAuth = authorizationStatus === AuthorizationStatus.AUTH;
+const Header = ({isAuth, authInfo}) => {
 
   return (
     <header className="header">
@@ -41,12 +39,12 @@ const Header = ({authorizationStatus, authInfo}) => {
 };
 
 Header.propTypes = {
-  authorizationStatus: PropTypes.oneOf(Object.keys(AuthorizationStatus)).isRequired,
+  isAuth: PropTypes.bool.isRequired,
   authInfo: authInfoType,
 };
 
 const mapStateToProps = (state) => ({
-  authorizationStatus: getAuthorizationStatus(state),
+  isAuth: getIsAuth(state),
   authInfo: getAuthInfo(state),
 });
 

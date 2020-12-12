@@ -28,10 +28,21 @@ const BaseOfferCard = (props) => {
     type,
   } = offer;
 
+  const handleMouseEnter = (evt) => {
+    if (onOfferCardMouseEnter) {
+      onOfferCardMouseEnter(evt, offer);
+    }
+  };
+  const handleMouseLeave = (evt) => {
+    if (onOfferCardMouseLeave) {
+      onOfferCardMouseLeave(evt);
+    }
+  };
+
   return (
     <article className={`place-card ${className}`}
-      onMouseEnter={(evt) => (onOfferCardMouseEnter ? onOfferCardMouseEnter(evt, offer) : ``)}
-      onMouseLeave={(evt) => (onOfferCardMouseLeave ? onOfferCardMouseLeave(evt) : ``)}>
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}>
 
       {isPremium &&
         <div className="place-card__mark">

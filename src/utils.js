@@ -45,7 +45,18 @@ export const sortOffersBySortyngType = (offers, sortingType) => {
 
 export const filterArrayOfObjectByField = (arrayName, fieldName, value) => arrayName.filter((obj) => obj[fieldName] === value);
 
-export const filterOffersByCity = (offers, city) => offers.filter((obj) => obj.city.name === city);
+export const filterOffersByCity = (offers, city) => offers.filter((offer) => offer.city.name === city);
+
+export const getFavoriteCities = (offers) => {
+  let favoriteCities = [];
+  if (offers.length) {
+    // Получить массив со всеми городами из списка favorite
+    offers.map((u) => favoriteCities.push(u.city.name));
+    favoriteCities = [...new Set(favoriteCities)];
+  }
+
+  return favoriteCities;
+};
 
 export const extend = (a, b) => {
 

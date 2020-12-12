@@ -8,6 +8,7 @@ import Header from "../header/header";
 import Footer from "../footer/footer";
 import {LoadingStatusForRequests} from "../../const.js";
 import {offerType, loadingStatusType} from '../../types';
+import {filterOffersByCity, getFavoriteCities} from '../../utils';
 import {getFavoritesOffers, getFavoritesLoadingStatus} from "../../store/selectors/selectors";
 import {Preloader} from "../preloader/preloader";
 
@@ -20,18 +21,7 @@ const Favorites = ({favoriteOffers, favoritesLoadingStatus}) => {
   }
 
   const isFavoritesListNotEmpty = favoriteOffers.length > 0;
-
-  let favoriteCities = [];
-  if (isFavoritesListNotEmpty) {
-    // Получить массив со всеми городами из списка favorite
-    favoriteOffers.map((u) => favoriteCities.push(u.city.name));
-    favoriteCities = [...new Set(favoriteCities)];
-  }
-
-  // Получить все favorite offers в конкретном городе
-  const offersInCity = (city) => {
-    return favoriteOffers.filter((offer) => offer.city.name === city);
-  };
+  const favoriteCities = getFavoriteCities(favoriteOffers);
 
   return (!isFavoritesListNotEmpty ? <FavoritesEmpty/> : (
     <React.Fragment>
@@ -58,7 +48,7 @@ const Favorites = ({favoriteOffers, favoritesLoadingStatus}) => {
                         </div>
                       </div>
                       <div className="favorites__places">
-                        {offersInCity(city).map((offer) => (
+                        {filterOffersByCity(favoriteOffers, city).map((offer) => (
                           <FavoriteOfferCard key={`${i}-${offer.id}`}
                             offer={offer}
                           />

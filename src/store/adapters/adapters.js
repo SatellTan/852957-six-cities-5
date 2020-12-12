@@ -38,6 +38,7 @@ export const adaptOfferToClient = (data) => {
   сonvertKeysOfObject(offer, offerKeysForConvert);
 
   if (offer.host) {
+    offer.host = Object.assign({}, offer.host);
     сonvertKeysOfObject(offer.host, userKeysForConvert);
   }
 

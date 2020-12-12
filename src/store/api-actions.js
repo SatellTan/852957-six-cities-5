@@ -6,7 +6,8 @@ import {
   redirectToRoute,
   sendingAction,
   sendingSuccessAction,
-  sendingErrorAction} from "./action";
+  sendingErrorAction,
+  replaceOffer} from "./action";
 import {AuthorizationStatus, AppRoute, APIRoute} from "../const";
 import {adaptOffersToClient, adaptOfferToClient, adaptReviewsToClient, adaptAuthInfoToClient} from "./adapters/adapters";
 
@@ -90,7 +91,10 @@ export const sendComment = ({offerId, comment, rating, clearForm}) => (dispatch,
 export const postFavorite = (id, status) => (dispatch, _getState, api) => {
   dispatch(sendingAction(`BOOKMARK`));
   api.post(`/favorite/${id}/${status}`)
-    .then(({data}) => dispatch(sendingSuccessAction(`BOOKMARK`, adaptOfferToClient(data))))
+    .then(({data}) => {
+      dispatch(sendingSuccessAction(`BOOKMARK`, adaptOfferToClient(data)));
+      dispatch(replaceOffer(adaptOfferToClient(data)));
+    })
     .then(() => dispatch(fetchFavoritesList()))
     .catch((error) => {
       dispatch(sendingErrorAction(`BOOKMARK`, error));
